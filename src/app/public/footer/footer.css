@@ -1,0 +1,16 @@
+.store-footer {
+  background-color: #0a001f; /* Fondo sólido oscuro */
+}
+
+.store-footer a {
+  transition: color 0.2s ease;
+}
+
+.store-footer a:hover {
+  color: #a78bfa;
+  text-decoration: none;
+}
+
+.store-footer hr {
+  border-color: rgba(255, 255, 255, 0.2);
+}

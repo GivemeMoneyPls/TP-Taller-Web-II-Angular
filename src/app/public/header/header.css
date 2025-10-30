@@ -1,0 +1,38 @@
+/* Fondo morado */
+.navbar {
+  background: linear-gradient(90deg, #2b0059, #4b0082);
+}
+
+/* Estilo del buscador */
+form .form-control {
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+}
+
+form .form-control::placeholder {
+  color: #bbb;
+}
+
+form .btn-outline-light {
+  border-radius: 50%;
+}
+
+/* Botón de inicio de sesión */
+.btn-primary {
+  background-color: #9b6fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #b68bff;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  form.d-flex {
+    width: 100% !important;
+    margin-top: 0.5rem;
+  }
+}

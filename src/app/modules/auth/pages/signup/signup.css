@@ -1,0 +1,112 @@
+/* 1. EL FONDO OSCURO */
+:host {
+  display: block; 
+  background: radial-gradient(circle at top left, #1b0044, #0a001f);
+  min-height: calc(100vh - 160px); 
+  padding: 3rem 1rem; 
+  color: #fff;
+}
+
+/* 2. EL CONTENEDOR DEL FORMULARIO */
+.form-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  padding: 2.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+/* 3. LOS GRUPOS DEL FORMULARIO */
+.form-group {
+  margin-bottom: 1.5rem; 
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #bbb; 
+  font-weight: 500;
+}
+
+/* 4. LOS INPUTS */
+.form-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  color: #fff;
+  width: 100%;
+  padding: 0.75rem;
+  box-sizing: border-box; 
+  border-radius: 0.5rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.form-input::placeholder {
+  color: #888;
+}
+
+.form-input:focus {
+  border-color: #8b5cf6; 
+  box-shadow: none;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* 5. FILA */
+.form-row {
+  display: flex;
+  gap: 1.5rem; 
+}
+.form-row .form-group {
+  width: 100%; 
+}
+
+/* 6. EL BOTÓN */
+.submit-btn {
+  background-color: #8b5cf6;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: #a78bfa;
+}
+
+.submit-btn:disabled {
+  background-color: #555;
+  border-color: #555;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+/* 7. MENSAJE DE ERROR */
+.error-message {
+  color: #e63946;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* 8. RESPONSIVE */
+@media (max-width: 576px) {
+  .form-row {
+    flex-direction: column;
+    gap: 1.5rem; 
+  }
+
+  .form-card {
+    padding: 1.5rem;
+  }
+}

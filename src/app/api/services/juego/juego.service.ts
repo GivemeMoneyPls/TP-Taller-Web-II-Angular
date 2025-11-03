@@ -12,7 +12,7 @@ export class JuegoService {
   httpClient = inject(HttpClient);
 
   getJuegos():Observable<Juego[]>{
-    return this.httpClient.get<Juego[]>(`${environment.API_URL}`);
+    return this.httpClient.get<Juego[]>(`${environment.API_URL_GAME}`);
   }
 
 }

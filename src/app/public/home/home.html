@@ -1,76 +1,11 @@
 <div class="container-fluid py-4 store-bg">
   <div class="row">
-    <!-- 🧭 SIDEBAR FILTROS -->
     <aside class="col-12 col-md-3 mb-4">
-      <div class="card filter-card p-3">
-        <h5 class="fw-bold text-light mb-3">Filtros</h5>
-
-        <!-- 💰 Precio -->
-        <div class="mb-4">
-          <label class="form-label text-light fw-semibold">Rango de precios (USD)</label>
-          <div class="d-flex align-items-center gap-2">
-            <input
-              type="number"
-              class="form-control form-control-sm filter-input"
-              id="precioMin"
-              min="0"
-              max="200"
-              placeholder="Mín"
-            />
-            <span class="text-secondary">-</span>
-            <input
-              type="number"
-              class="form-control form-control-sm filter-input"
-              id="precioMax"
-              min="0"
-              max="200"
-              placeholder="Máx"
-            />
-          </div>
-        </div>
-
-        <!-- 🎮 Plataforma -->
-        <div class="mb-4">
-          <label class="form-label text-light fw-semibold">Plataforma</label>
-          <select class="form-select form-select-sm filter-input" id="filtroPlataforma">
-            <option value="">Todas</option>
-            <option>Steam</option>
-            <option>PlayStation 5</option>
-            <option>Xbox Series X</option>
-            <option>Nintendo Switch</option>
-          </select>
-        </div>
-
-        <!-- 🕹️ Géneros -->
-        <div class="mb-4">
-          <label class="form-label text-light fw-semibold">Géneros</label>
-          <div class="form-check text-light">
-            <input class="form-check-input color-check" type="checkbox" id="genAccion" />
-            <label class="form-check-label" for="genAccion">Acción</label>
-          </div>
-          <div class="form-check text-light">
-            <input class="form-check-input" type="checkbox" id="genAventura" />
-            <label class="form-check-label" for="genAventura">Aventura</label>
-          </div>
-          <div class="form-check text-light">
-            <input class="form-check-input" type="checkbox" id="genRPG" />
-            <label class="form-check-label" for="genRPG">RPG</label>
-          </div>
-          <div class="form-check text-light">
-            <input class="form-check-input" type="checkbox" id="genDeportes" />
-            <label class="form-check-label" for="genDeportes">Deportes</label>
-          </div>
-        </div>
-
-        <button class="btn btn-primary w-100 fw-semibold mt-2">Aplicar filtros</button>
-      </div>
+        <app-filters></app-filters>
     </aside>
-
     <!-- 🧱 CONTENIDO PRINCIPAL -->
     <main class="col-12 col-md-9">
-      
         <app-list-juegos></app-list-juegos>
-
     </main>
   </div>
 </div>

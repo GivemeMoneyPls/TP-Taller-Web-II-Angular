@@ -1,0 +1,14 @@
+@if (currentNotification$ | async; as notif) {
+  <div class="notification-bar {{ getNotificationClass(notif.type) }}" 
+       role="alert" 
+       (click)="notificationService.hide()">
+
+    <span class="message-text">
+      {{ notif.text }}
+    </span>
+
+    <button class="close-btn text-white-50">
+      &times;
+    </button>
+  </div>
+}

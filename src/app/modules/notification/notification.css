@@ -1,0 +1,48 @@
+.notification-bar {
+  padding: 1rem 2rem;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.bg-success-dark { background-color: #38a169; }
+.bg-error-dark { background-color: #e53e3e; }
+.bg-info-dark { background-color: #8b5cf6; }
+
+.message-text {
+  font-weight: 500;
+  flex-grow: 1;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-left: 1rem;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.close-btn:hover {
+  opacity: 1;
+}
+
+@media (max-width: 576px) {
+  .notification-bar {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .close-btn {
+    font-size: 1.25rem;
+    margin-left: 0.5rem;
+  }
+}

@@ -1,0 +1,55 @@
+<div class="signup-wrapper">
+
+  <div class="form-card">
+
+    <h2 class="form-title">Crear Cuenta</h2>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" class="form-input" formControlName="email">
+        @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
+          <div class="error-message">
+            Por favor, ingresa un email válido.
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="contraseña">Contraseña</label>
+        <input id="contraseña" type="password" class="form-input" formControlName="contraseña" placeholder="Mínimo 8 caracteres">
+        @if (signupForm.get('contraseña')?.invalid && signupForm.get('contraseña')?.touched) {
+          <div class="error-message">
+            La contraseña debe tener al menos 8 caracteres.
+          </div>
+        }
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" type="text" class="form-input" formControlName="nombre">
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input id="apellido" type="text" class="form-input" formControlName="apellido">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="direccion">Dirección</label>
+        <input id="direccion" type="text" class="form-input" formControlName="direccion">
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="signupForm.invalid">
+        Crear Cuenta
+      </button>
+
+      <div class="text-center mt-3" style="padding-top: 1rem;">
+        <a [routerLink]="['/signin']" class="form-link">¿Ya tienes cuenta? Inicia sesión aquí</a>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<a [routerLink]="['/cart']" class="cart-fab">
+
+  <i class="bi bi-cart"></i>
+
+  @if (itemCount > 0) {
+    <span class="cart-badge">{{ itemCount }}</span>
+  }
+
+</a>

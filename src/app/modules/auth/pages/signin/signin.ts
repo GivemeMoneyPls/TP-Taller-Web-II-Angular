@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angula
 import { AuthService } from '../../../../api/services/auth/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { SigninData } from '../../interfaces/user.interface'; 
+import { NotificationService } from '../../../../api/services/notification/notification.service';
 
 @Component({
   selector: 'app-signin',
@@ -21,6 +22,7 @@ export class SigninComponent {
   fb = inject(FormBuilder);
   authService = inject(AuthService);
   router = inject(Router);
+  notificationService = inject(NotificationService);
 
   signinForm: FormGroup;
 
@@ -41,13 +43,12 @@ export class SigninComponent {
 
     this.authService.loginUser(loginData).subscribe({
       next: (response) => {
-        console.log("¡Login exitoso!", response);
-        alert("¡Bienvenido! Iniciaste sesión.");
+        this.notificationService.show('success', `¡Bienvenido, ${response.user.nombre}!`);
         this.router.navigate(['/']); 
       },
       error: (err) => {
-        console.error("Error al iniciar sesión:", err);
-        alert(`Error: ${err.error.message}`);
+        const errorMessage = err.error?.message || 'Error de conexión. Intenta más tarde.';
+        this.notificationService.show('error', errorMessage, 6000);
       }
     });
   }

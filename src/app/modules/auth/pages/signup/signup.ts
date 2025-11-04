@@ -2,14 +2,16 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../../../../api/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SignupData } from '../../interfaces/user.interface';
+import { NotificationService } from '../../../../api/services/notification/notification.service';
 
 @Component({
   selector: 'app-signup',
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './signup.html',
   styleUrl: './signup.css'
@@ -19,6 +21,7 @@ export class SignupComponent {
   fb = inject(FormBuilder);
   authService = inject(AuthService);
   router = inject(Router);
+  notificationService = inject(NotificationService);
 
   signupForm: FormGroup;
 
@@ -45,12 +48,13 @@ export class SignupComponent {
     this.authService.registerUser(userData).subscribe({
       next: (response) => {
         console.log("¡Usuario creado!", response);
-        alert("¡Cuenta creada con éxito! Ahora puedes iniciar sesión.");
+        this.notificationService.show('success', '¡Cuenta creada con éxito! Por favor inicia sesión.');
         this.router.navigate(['/signin']); 
       },
       error: (err) => {
         console.error("Error al registrar:", err);
-        alert(`Error: ${err.error.error}`);
+        const errorMessage = err.error?.error || 'Error desconocido al registrar.';
+        this.notificationService.show('error', errorMessage, 6000);
       }
     });
   }

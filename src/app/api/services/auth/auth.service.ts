@@ -13,7 +13,7 @@ export class AuthService {
   httpClient = inject(HttpClient);
   router = inject(Router);
 
-  private apiUrl = `${environment.API_URL}/auth`;
+  private apiUrl = `${environment.API_URL_AUTH}`;
 
   private user = new BehaviorSubject<User | null>(this.getInitialUser());
 

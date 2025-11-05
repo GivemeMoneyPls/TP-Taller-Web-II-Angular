@@ -29,6 +29,50 @@ form .btn-outline-light {
   background-color: #b68bff;
 }
 
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #a78bfa;
+  color: #1b0044;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.dropdown-menu {
+  display: none; 
+  position: absolute; 
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu-dark {
+  background-color: #0a001f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.dropdown-item {
+  color: #eee;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 0;
+}
+.dropdown-item:hover {
+  background-color: #8b5cf6;
+  color: #fff;
+}
+
+
 /* Responsive */
 @media (max-width: 992px) {
   form.d-flex {

@@ -1,0 +1,65 @@
+/* Para que el link funcione bien con position: fixed,
+  lo definimos como un bloque.
+*/
+:host {
+  display: block;
+}
+
+/* El botón flotante principal (FAB) */
+.cart-fab {
+  /* --- 1. EL "FLOTE" --- */
+  position: fixed; /* ¡Esto lo hace flotar! */
+  bottom: 2rem;    /* A 2rem del fondo */
+  right: 2rem;     /* A 2rem de la derecha */
+  z-index: 1000;   /* Por encima de casi todo */
+
+  /* --- 2. LA ESTÉTICA (tu diseño) --- */
+  width: 60px;
+  height: 60px;
+  background-color: #8b5cf6; /* Tu violeta principal */
+  color: #fff;
+  border-radius: 50%; /* ¡Círculo perfecto! */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+  /* --- 3. CENTRADO DEL ÍCONO --- */
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+
+  /* --- 4. EFECTOS --- */
+  transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+.cart-fab:hover {
+  background-color: #a78bfa; /* Tu violeta claro */
+  transform: scale(1.1) rotate(5deg); /* Efecto "vivo" */
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* El ícono de carrito (bi-cart) */
+.cart-fab i {
+  font-size: 1.5rem; /* Ícono grande */
+  line-height: 1;
+}
+
+/* El "badge" (burbuja) con el número */
+.cart-badge {
+  position: absolute;
+  top: -5px;   /* Un poquito salido por arriba */
+  right: -5px; /* Un poquito salido por la derecha */
+
+  background-color: #e63946; /* Rojo para notificaciones */
+  color: white;
+
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+
+  /* Centrado del número */
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border: 2px solid #fff; /* Borde blanco para resaltar */
+}

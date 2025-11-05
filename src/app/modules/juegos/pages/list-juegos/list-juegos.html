@@ -1,3 +1,6 @@
+<div *ngIf="mensajeExito" class="alert alert-success alert-fixed">
+  {{ mensajeExito }}
+</div>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
   @for (juego of juegos; track juego.id) {
     <div class="col">
@@ -10,7 +13,7 @@
           <p class="text-secondary small mb-2">{{ juego.plataforma.nombre }} • {{ juego.juego_genero | generosPipe }}</p>
           <p class="fw-semibold text-primary mb-3 fs-5">{{ juego.precio | currency }}</p>
           <div class="mt-auto d-flex gap-2">
-            <button class="btn btn-outline-primary btn-sm flex-fill">
+            <button class="btn btn-outline-primary btn-sm flex-fill" (click)="agregarAlCarrito(juego.id)">
               <i class="bi bi-cart-plus me-1"></i> Añadir
             </button>
             <button class="btn btn-primary btn-sm flex-fill">

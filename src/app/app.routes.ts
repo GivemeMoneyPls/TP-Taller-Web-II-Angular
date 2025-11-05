@@ -21,6 +21,12 @@ export const routes: Routes = [
       component: SigninComponent
     },
 
+
+    {
+    path: 'juego/:id',
+    component: DetailJuegos
+  },
+
     {
       path: '**',
       redirectTo: ''

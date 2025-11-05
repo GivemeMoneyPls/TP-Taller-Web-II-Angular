@@ -1,0 +1,118 @@
+/* Sidebar de filtros */
+.filter-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+}
+
+.filter-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+}
+
+.filter-input::placeholder {
+  color: #bbb;
+}
+
+.filter-input:focus {
+  border: 1px solid #8b5cf6;
+  box-shadow: none;
+}
+
+input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  appearance: none;       /* Oculta estilo por defecto */
+  border: 2px solid #bbb; 
+  border-radius: 0.25rem;
+  background-color: #222; /* fondo por defecto */
+}
+
+input[type="checkbox"]:checked {
+  background-color: #8b5cf6; /* Color cuando está marcado */
+  border-color: #8b5cf6;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #a78bfa;
+}
+
+input[type="checkbox"]:focus {
+  outline: 2px solid #8b5cf6; /* color violeta */
+  outline-offset: 2px; /* separación entre checkbox y outline */
+}
+
+/* Chrome, Edge, Safari */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.filter-card select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  outline: none;
+  appearance: none; /* Quita la flecha por defecto en algunos navegadores */
+  cursor: pointer;
+  -webkit-appearance: none; /* Chrome, Safari, Edge */
+  -moz-appearance: none;    /* Firefox */
+  appearance: none; 
+  background-image: none;
+}
+
+select option {
+  background-color: #1b0044; /* violeta oscuro */
+  color: #fff;
+  padding: 0.5rem 1rem;
+}
+
+/* Opción seleccionada */
+select option:checked {
+  background-color: #8b5cf6; /* violeta principal */
+  color: #fff;
+}
+
+/* Hover en navegadores que lo soportan (Chrome, Edge, Safari) */
+select option:hover {
+  background-color: #a78bfa; /* violeta más claro que el seleccionado */
+  color: #fff;
+}
+
+/* Focus y hover */
+.filter-card select:focus {
+  border: 1px solid #8b5cf6; /* borde violeta al hacer focus */
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.filter-card select:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #8b5cf6;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #a78bfa;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  aside {
+    margin-bottom: 2rem;
+  }
+}

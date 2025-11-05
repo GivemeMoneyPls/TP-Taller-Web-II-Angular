@@ -12,7 +12,7 @@ export class CarritoService {
 
   agregarAlCarrito(juegoId: number, usuarioId: number): Observable<CarritoResponse> {
   return this.httpClient.post<CarritoResponse>(
-    `${environment.API_URL}/carrito/agregar`, 
+    `${environment.API_URL_CARRITO}/agregar`,
     { juegoId, usuarioId }
   );
 }

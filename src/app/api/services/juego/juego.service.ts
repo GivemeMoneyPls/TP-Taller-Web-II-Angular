@@ -19,4 +19,11 @@ export class JuegoService {
     return this.httpClient.get<Juego>(`${environment.API_URL_GAME}${id}`);
   }
 
+  getJuegosSimilares(generos: string[], idActual: number): Observable<Juego[]> {
+    const generosParam = generos.join(',');
+    return this.httpClient.get<Juego[]>(
+      `${environment.API_URL_GAME}similares/${idActual}?generos=${generosParam}`
+    );
+}
+
 }

@@ -3,105 +3,106 @@
   display: block;
 }
 
-/* Asegura fondo oscuro para la vista del carrito */
+/* Fondo oscuro general */
 .carrito-page {
-  background-color: #0f1724; /* negro azulado suave */
+  background-color: #0f1724;
   min-height: 100vh;
   padding-bottom: 3.5rem;
   color: #e6e6e6;
 }
 
-/* Contenedor centrado */
+/* Contenedor principal */
 .container.py-4 {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* ===== Alert fija (mensaje) ===== */
-.alert-fixed {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1050;
-  max-width: 720px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-}
-
-/* ===== Cards compactas ===== */
+/* ===== Cards estilo lista ===== */
 .game-card {
-  background-color: rgba(255,255,255,0.04); /* sutil sobre el fondo oscuro */
-  border-radius: 0.75rem;
-  overflow: hidden;
-  transition: transform 0.22s ease, box-shadow 0.28s ease;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 0.6rem;
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  font-size: 0.92rem;
-  border: 1px solid rgba(255,255,255,0.03);
+  flex-direction: row; /* 🟢 ahora horizontal, como fila */
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.8rem;
+  position: relative;
+  transition: background 0.25s ease, transform 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Hover */
 .game-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 30px rgba(139,92,246,0.12);
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-3px);
 }
 
-/* ===== Imagen ===== */
+/* ===== Imagen pequeña ===== */
 .game-img-wrapper {
-  height: 130px; /* más pequeña para que entren más cards */
+  width: 90px;
+  height: 90px;
+  border-radius: 0.5rem;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.12));
+  flex-shrink: 0;
 }
 
 .game-img-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.3s ease;
 }
 
-.game-card:hover .game-img-wrapper img {
+.game-card:hover img {
   transform: scale(1.05);
 }
 
-/* ===== Cuerpo de la card ===== */
+/* ===== Info del juego ===== */
 .card-body {
-  padding: 0.85rem 0.9rem;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  justify-content: center;
+  flex: 1;
+  padding: 0;
 }
 
 .card-body h5 {
-  font-size: 0.98rem;
-  margin: 0;
+  font-size: 1rem;
   color: #fff;
+  margin: 0 0 0.3rem 0;
 }
 
 .text-secondary {
   color: #aeb6c3 !important;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
 }
 
 .text-primary {
   color: #a78bfa !important;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
-/* Precio destacado */
-.fs-5 {
-  font-size: 1.05rem;
-  margin-bottom: 0;
+/* ===== Badge de cantidad ===== */
+.cantidad-badge {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: linear-gradient(135deg, #9b1eb4, #871a9c);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.4rem; /* 🔥 mucho más grande */
+  padding: 8px 16px;
+  border-radius: 50px;
+  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.4);
+  transform: rotate(-10deg); /* 💫 da un toque dinámico */
+  z-index: 10;
 }
-.text-light {
-    text-align: center;
-}
-/* ===== Botón Finalizar ===== */
+
+/* ===== Botón Finalizar Compra ===== */
 .finalizar-wrapper {
   text-align: center;
-  margin-top: 1.75rem;
+  margin-top: 2rem;
   margin-bottom: 3rem;
 }
 
@@ -109,46 +110,38 @@
   background-color: #8b5cf6;
   color: #fff;
   border: none;
-  padding: 0.7rem 2.2rem;
+  padding: 0.9rem 3rem;
   border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(139,92,246,0.18);
-  transition: transform .15s ease, box-shadow .15s ease;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.25);
+  transition: all 0.2s ease;
 }
 
 .btn-finalizar:hover {
+  background-color: #a78bfa;
   transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(139,92,246,0.22);
-}
-/* Badge de cantidad */
-.cantidad-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background-color: #8806c5; 
-  color: white;
-  font-weight: 700;
-  padding: 6px 12px; 
-  border-radius: 30px;
-  font-size: 0.9rem;
-  box-shadow: 0 5px 5px 5px rgba(180, 87, 255, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  z-index: 5; 
-  pointer-events: none;
+  box-shadow: 0 10px 28px rgba(167, 139, 250, 0.35);
 }
 
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .game-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  .game-img-wrapper {
+    width: 100%;
+    height: 160px;
+  }
 
-/* ===== Responsive: ajustar tamaños para pantallas pequeñas ===== */
-@media (max-width: 992px) {
-  .game-img-wrapper { height: 120px; }
-  .card-body { padding: 0.7rem; }
-}
+  .cantidad-badge {
+    top: 6px;
+    left: 6px;
+    transform: none;
+  }
 
-@media (max-width: 576px) {
-  .game-img-wrapper { height: 100px; }
-  .card-body h5 { font-size: 0.92rem; }
-  .text-secondary { font-size: 0.72rem; }
-  .fs-5 { font-size: 0.95rem; }
-  .btn-finalizar { width: 90%; padding: 0.65rem; }
+  .btn-finalizar {
+    width: 90%;
+  }
 }

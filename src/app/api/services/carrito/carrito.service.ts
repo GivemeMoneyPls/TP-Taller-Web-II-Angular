@@ -16,4 +16,9 @@ export class CarritoService {
     { juegoId, usuarioId }
   );
 }
+  getCarrito(usuarioId: number): Observable<CarritoItem[]> {
+      return this.httpClient.get<CarritoItem[]>(
+        `${environment.API_URL_CARRITO}/${usuarioId}`
+      );
+    }
 }

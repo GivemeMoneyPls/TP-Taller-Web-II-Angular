@@ -22,7 +22,7 @@
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 0.6rem;
   display: flex;
-  flex-direction: row; /* 🟢 ahora horizontal, como fila */
+  flex-direction: row; 
   align-items: center;
   gap: 1rem;
   padding: 0.8rem 1rem;
@@ -91,11 +91,11 @@
   background: linear-gradient(135deg, #9b1eb4, #871a9c);
   color: #fff;
   font-weight: 800;
-  font-size: 1.4rem; /* 🔥 mucho más grande */
+  font-size: 1.4rem; 
   padding: 8px 16px;
   border-radius: 50px;
-  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.4);
-  transform: rotate(-10deg); /* 💫 da un toque dinámico */
+  box-shadow: 0 6px 14px rgba(45, 34, 197, 0.4);
+  transform: rotate(-10deg); 
   z-index: 10;
 }
 

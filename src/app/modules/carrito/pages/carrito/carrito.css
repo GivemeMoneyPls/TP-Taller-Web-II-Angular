@@ -3,47 +3,55 @@
   display: block;
 }
 
-/* Fondo oscuro general */
 .carrito-page {
   background-color: #0f1724;
   min-height: 100vh;
-  padding-bottom: 3.5rem;
+  padding-bottom: 4rem;
   color: #e6e6e6;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* Contenedor principal */
+/* ===== Contenedor principal ===== */
 .container.py-4 {
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
 }
 
-/* ===== Cards estilo lista ===== */
-.game-card {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 0.6rem;
+/* ===== Lista de ítems ===== */
+.carrito-lista {
   display: flex;
-  flex-direction: row; 
-  align-items: center;
+  flex-direction: column;
   gap: 1rem;
-  padding: 0.8rem 1rem;
-  margin-bottom: 0.8rem;
+}
+
+/* ===== Card horizontal ===== */
+.game-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.7rem;
+  padding: 1rem 1.2rem;
+  transition: all 0.25s ease;
   position: relative;
-  transition: background 0.25s ease, transform 0.25s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  flex-wrap: wrap; /* ✅ ayuda al responsive */
 }
 
 .game-card:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-3px);
 }
 
-/* ===== Imagen pequeña ===== */
+/* ===== Imagen ===== */
 .game-img-wrapper {
-  width: 90px;
-  height: 90px;
-  border-radius: 0.5rem;
+  width: 100px;
+  height: 100px;
+  border-radius: 0.6rem;
   overflow: hidden;
   flex-shrink: 0;
+  margin-right: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .game-img-wrapper img {
@@ -59,60 +67,69 @@
 
 /* ===== Info del juego ===== */
 .card-body {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex: 1;
-  padding: 0;
+  min-width: 0;
 }
 
 .card-body h5 {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #fff;
-  margin: 0 0 0.3rem 0;
+  margin-bottom: 0.2rem;
+  word-break: break-word;
 }
 
 .text-secondary {
   color: #aeb6c3 !important;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
 }
 
 .text-primary {
   color: #a78bfa !important;
   font-weight: 600;
   font-size: 1rem;
+  margin-top: 0.2rem;
 }
 
-/* ===== Badge de cantidad ===== */
+/* ===== Badge cantidad ===== */
 .cantidad-badge {
   position: absolute;
-  top: -10px;
-  left: -10px;
-  background: linear-gradient(135deg, #9b1eb4, #871a9c);
+  top: -6px;
+  left: -6px;
+  background: linear-gradient(135deg, #a217da, #7d0baa);
   color: #fff;
   font-weight: 800;
-  font-size: 1.4rem; 
-  padding: 8px 16px;
-  border-radius: 50px;
-  box-shadow: 0 6px 14px rgba(45, 34, 197, 0.4);
-  transform: rotate(-10deg); 
+  font-size: 1.1rem; /* 🔹 más chico */
+  padding: 4px 10px;
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(60, 13, 189, 0.4);
   z-index: 10;
+}
+
+/* ===== Precio alineado a la derecha ===== */
+.precio {
+  min-width: 90px;
+  text-align: right;
 }
 
 /* ===== Botón Finalizar Compra ===== */
 .finalizar-wrapper {
   text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
+  margin-top: 2.5rem;
 }
-
+.total-carrito{
+    font-size: 20px;
+}
 .btn-finalizar {
   background-color: #8b5cf6;
   color: #fff;
   border: none;
-  padding: 0.9rem 3rem;
+  padding: 1rem 3rem;
   border-radius: 999px;
   font-weight: 700;
+  font-size: 1.1rem;
   box-shadow: 0 8px 25px rgba(139, 92, 246, 0.25);
   transition: all 0.2s ease;
 }
@@ -128,17 +145,26 @@
   .game-card {
     flex-direction: column;
     align-items: flex-start;
+    text-align: center;
   }
 
   .game-img-wrapper {
     width: 100%;
-    height: 160px;
+    height: 180px;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .precio {
+    text-align: center;
+    margin-top: 0.5rem;
   }
 
   .cantidad-badge {
-    top: 6px;
-    left: 6px;
-    transform: none;
+    top: 8px;
+    left: 8px;
+    font-size: 1rem;
+    padding: 3px 8px;
   }
 
   .btn-finalizar {

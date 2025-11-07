@@ -30,6 +30,11 @@
               {{ juego.juego.plataforma.nombre }} •
               {{ juego.juego.juego_genero | generosPipe }}
             </p>
+            <!-- Botón estilo enlace -->
+          <button class="btn-link-eliminar" (click)="eliminarDelCarrito(juego)">
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+
           </div>
 
         

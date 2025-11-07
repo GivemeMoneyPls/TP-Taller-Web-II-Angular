@@ -55,4 +55,21 @@ export class Carrito {
       return sum + precio * item.cantidad;
     }, 0);
   }
+
+  eliminarDelCarrito(item: CarritoItem): void {
+  if (item.cantidad > 1) {
+    item.cantidad -= 1;
+  } else {
+    this.juegos = this.juegos.filter(j => j.juego.id !== item.juego.id);
+  }
+  this.calcularTotal();
+  const usuario = JSON.parse(localStorage.getItem('app_user') || '{}');
+  this.carritoService.eliminarDelCarrito(item.juego.id, usuario.id).subscribe({
+    next: () => {
+      this.mensaje = 'Producto eliminado del carrito';
+      setTimeout(() => this.mensaje = null, 2000);
+    },
+    error: (err) => console.error('Error al eliminar del carrito:', err)
+  });
+}
 }

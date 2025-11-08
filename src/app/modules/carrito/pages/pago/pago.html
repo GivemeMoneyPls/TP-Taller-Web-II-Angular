@@ -1,0 +1,57 @@
+<div class="pago-page">
+ 
+  <div *ngIf="mensajeExito" class="alert alert-success alert-fixed">
+    {{ mensajeExito }}
+  </div>
+
+  <div class="container py-4">
+    <h2 class="text-light mb-4 text-center">💳 Finalizar compra</h2>
+
+    <div class="resumen-compra mb-4 text-center">
+      <h5>Resumen del pedido</h5>
+      <p>Total a pagar: <strong>{{ total | currency }}</strong></p>
+    </div>
+
+    <form class="form-pago">
+      <div class="form-section">
+        <h5>Datos del comprador</h5>
+
+        <div class="form-group">
+          <label for="nombre">Nombre completo</label>
+          <input id="nombre" type="text" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input id="email" type="email" class="form-control" required />
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h5>Datos de la tarjeta</h5>
+        <div class="form-group">
+          <label for="numero">Número de tarjeta</label>
+          <input id="numero" type="text" maxlength="16" class="form-control" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group small-input">
+            <label for="vencimiento">Vencimiento</label>
+            <input id="vencimiento" type="text" placeholder="MM/AA" class="form-control" required />
+          </div>
+
+          <div class="form-group small-input">
+            <label for="cvv">CVV</label>
+            <input id="cvv" type="password" maxlength="3" class="form-control" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="button" class="btn btn-finalizar btn-lg px-5" (click)="finalizarCompra()">
+          <i class="bi bi-check-circle me-2"></i> Finalizar compra
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

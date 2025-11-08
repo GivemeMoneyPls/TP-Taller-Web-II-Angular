@@ -1,0 +1,129 @@
+:host {
+  display: block;
+}
+
+.pago-page {
+  background-color: #0f1724;
+  min-height: 100vh;
+  padding-bottom: 4rem;
+  color: #e6e6e6;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.container.py-4 {
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Títulos */
+h2,
+h5 {
+  color: #ffffff;
+}
+
+/* ===== Resumen ===== */
+.resumen-compra {
+  background: rgba(139, 92, 246, 0.15);
+  padding: 1rem 1.2rem;
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.resumen-compra strong {
+  color: #a78bfa;
+  font-size: 1.2rem;
+}
+
+/* ===== Formularios ===== */
+.form-section {
+  margin-bottom: 1.5rem;
+}
+
+.form-section h5 {
+  margin-bottom: 1rem;
+  color: #a78bfa;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-size: 0.9rem;
+  color: #aeb6c3;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.25);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.small-input {
+  flex: 1;
+}
+
+/* ===== Botón principal ===== */
+.btn-finalizar {
+  background-color: #8b5cf6;
+  color: #fff;
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-finalizar:hover {
+  background-color: #a78bfa;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(167, 139, 250, 0.35);
+}
+.alert-fixed {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 576px) {
+  .container.py-4 {
+    padding: 1.5rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .btn-finalizar {
+    width: 100%;
+  }
+}

@@ -6,6 +6,7 @@ import { SigninComponent } from './modules/auth/pages/signin/signin';
 import { MisComprasComponent } from './modules/mis-compras/mis-compras.component';
 
 import { Carrito } from './modules/carrito/pages/carrito/carrito';
+import { Pago} from './modules/carrito/pages/pago/pago';
 export const routes: Routes = [
 
     {
@@ -37,6 +38,11 @@ export const routes: Routes = [
   {
     path: 'carrito',
     component: Carrito
+  },
+
+  {
+    path: 'pago',
+    component: Pago
   },
     {
       path: '**',

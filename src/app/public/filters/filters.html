@@ -7,50 +7,57 @@
           <label class="form-label text-light fw-semibold">Rango de precios (USD)</label>
           <div class="d-flex align-items-center gap-2">
             <input
-              type="number"
-              class="form-control form-control-sm filter-input"
-              id="precioMin"
-              min="0"
-              max="200"
-              placeholder="Mín"
-            />
+                type="number"
+                class="form-control form-control-sm filter-input"
+                id="precioMin"
+                min="0"
+                max="200"
+                placeholder="Mín"
+                [(ngModel)]="filtrosForm.precioMin"  />
             <span class="text-secondary">-</span>
             <input
-              type="number"
-              class="form-control form-control-sm filter-input"
-              id="precioMax"
-              min="0"
-              max="200"
-              placeholder="Máx"
-            />
+                type="number"
+                class="form-control form-control-sm filter-input"
+                id="precioMax"
+                min="0"
+                max="200"
+                placeholder="Máx"
+                [(ngModel)]="filtrosForm.precioMax"  />
           </div>
         </div>
 
         <!-- 🎮 Plataforma -->
         <div class="mb-4">
           <label class="form-label text-light fw-semibold">Plataforma</label>
-          <select class="form-select form-select-sm filter-input" id="filtroPlataforma">
-            <option value="">Todas</option>
+          <select 
+            class="form-select form-select-sm filter-input" 
+            id="filtroPlataforma"
+            [(ngModel)]="filtrosForm.plataformaId" >
+            <option [ngValue]="undefined">Todas</option> 
             @for (plataforma of plataformas; track plataforma.id) {
-              <option value="{{ plataforma.id }}">{{ plataforma.nombre }}</option>
-            }
-          </select>
+                <option [ngValue]="plataforma.id">{{ plataforma.nombre }}</option> }
+        </select>
         </div>
 
         <!-- 🕹️ Géneros -->
         <div class="mb-4">
-          <label class="form-label text-light fw-semibold">Géneros</label>
-          @for (genero of generos; track $index) {
-            <div class="form-check text-light">
-              <input
-                class="form-check-input color-check"
-                type="checkbox"
-                id="{{ genero.nombre }}"
-              />
-              <label class="form-check-label" for="{{ genero.nombre }}">{{ genero.nombre }}</label>
-            </div>
-          }
+        <label class="form-label text-light fw-semibold">Géneros</label>
+        @for (genero of generos; track $index) {
+        <div class="form-check text-light">
+            <input
+  class="form-check-input color-check"
+  type="checkbox"
+  id="genero-{{ genero.id }}"
+  [value]="genero.id"
+  (change)="onGeneroChange($event, genero.id)"
+  [checked]="filtrosForm.generoIds.includes(genero.id)" />
+            <label class="form-check-label" for="genero-{{ genero.id }}">{{ genero.nombre }}</label>
+        </div>
+        }
         </div>
 
-        <button class="btn btn-primary w-100 fw-semibold mt-2">Aplicar filtros</button>
+        <button class="btn btn-primary w-100 fw-semibold mt-2" (click)="aplicarFiltros()">Aplicar filtros</button>
+
+         <button class="btn btn-primary w-100 fw-semibold mt-2" (click)="limpiarFiltros()">Limpiar filtros</button>
+
       </div>

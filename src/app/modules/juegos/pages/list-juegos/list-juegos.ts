@@ -6,6 +6,7 @@ import { JuegoService } from '../../../../api/services/juego/juego.service';
 import { CarritoService } from '../../../../api/services/carrito/carrito.service';
 import { GenerosPipe } from '../../pipes/generos-pipe';
 import { CurrencyPipe } from '@angular/common';
+import { JuegoFiltrosService } from '../../../../api/services/juego-filtros/juego-filtros.service';
 
 @Component({
   selector: 'app-list-juegos',
@@ -22,8 +23,15 @@ export class ListJuegos {
   carritoService = inject(CarritoService);
   router = inject(Router);
 
+  juegoFiltrosService = inject(JuegoFiltrosService);
+
   ngOnInit(): void {
     this.listJuegos();
+
+    // 🔁 Cuando cambian los filtros, se actualiza la lista automáticamente
+    this.juegoFiltrosService.juegos$.subscribe(juegos => {
+      this.juegos = juegos;
+    });
   }
 
   listJuegos() {

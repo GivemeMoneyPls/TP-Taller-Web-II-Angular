@@ -28,22 +28,28 @@
 
   <div *ngIf="juegosSimilares.length" class="mt-5">
   <h4 class="text-light mb-3">Juegos similares</h4>
-  <div class="carousel-similar d-flex overflow-auto gap-4 py-2">
-    <div *ngFor="let js of juegosSimilares" class="card-similar bg-dark rounded shadow-sm p-3 d-flex flex-column justify-content-between align-items-center">
-      <img [src]="js.imagen_url"
-           class="img-similar mb-2"
-           [alt]="js.titulo"
-           (click)="verDetalle(js.id)"
-           style="cursor:pointer;"
-      />
-      <h6 class="fw-bold text-light mb-1 text-center">{{ js.titulo }}</h6>
-      <p class="mb-1 text-secondary small text-center">
-        Géneros:
-        <span *ngFor="let g of js.juego_genero; let last = last">
-          {{g.genero.nombre}}<span *ngIf="!last">, </span>
-        </span>
-      </p>
+
+  <div class="carousel-container">
+    <button class="carousel-btn prev" (click)="scrollLeft()">&#10094;</button>
+
+    <div class="carousel-track" #carouselTrack>
+      <div
+        class="card-similar bg-dark rounded shadow-sm p-3 text-center"
+        *ngFor="let js of juegosSimilares"
+        (click)="verDetalle(js.id)"
+        style="cursor: pointer;"
+      >
+        <img [src]="js.imagen_url" class="img-similar mb-2" [alt]="js.titulo" />
+        <h6 class="fw-bold text-light mb-1">{{ js.titulo }}</h6>
+        <p class="text-secondary small">
+          <span *ngFor="let g of js.juego_genero; let last = last">
+            {{ g.genero.nombre }}<span *ngIf="!last">, </span>
+          </span>
+        </p>
+      </div>
     </div>
+
+    <button class="carousel-btn next" (click)="scrollRight()">&#10095;</button>
   </div>
 </div>
 </div>

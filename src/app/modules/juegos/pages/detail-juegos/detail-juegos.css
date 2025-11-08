@@ -68,52 +68,104 @@ p {
   height: 3rem;
 }
 
-.carousel-similar {
-  scroll-snap-type: x mandatory;
-  min-height: 260px;
-  padding-bottom: 1rem;
+/*CARRUSEL */
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-top: 1rem;
 }
 
+.carousel-track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1rem 0;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+
 .card-similar {
-  width: 230px;
-  min-width: 220px;
-  max-width: 250px;
+  flex: 0 0 220px;
   background-color: #191436;
   border-radius: 0.85rem;
   box-shadow: 0 4px 20px rgba(80, 0, 200, 0.12);
-  margin-bottom: 10px;
-  scroll-snap-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
+  padding: 1rem;
 }
+
 .card-similar:hover {
   transform: translateY(-3px) scale(1.03);
   box-shadow: 0 8px 32px rgba(120, 90, 246, 0.22);
 }
+
 .img-similar {
   width: 100%;
-  height: 120px;
+  height: 130px;
   object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 2px 12px rgba(40, 0, 80, 0.14);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   transition: transform 0.2s;
 }
+
 .img-similar:hover {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
 .card-similar h6 {
-  font-size: 1.08rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+  color: #fff;
+  margin-bottom: 0.4rem;
 }
 
 .card-similar p {
-  font-size: 0.92rem;
-  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+  color: #a5a3c7;
+  margin: 0;
+}
+/*botones carrousel*/
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(120, 90, 246, 0.2);
+  border: none;
+  color: #c3b7ff;
+  font-size: 1.8rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.3s ease;
+  line-height: 1;
 }
 
+.carousel-btn:hover {
+  background: rgba(150, 120, 255, 0.5);
+  color: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
 
-/* Responsive */
+.carousel-btn.prev {
+  left: 0.4rem;
+}
+
+.carousel-btn.next {
+  right: 0.4rem;
+}
+
+/*RESPONSIVE */
 @media (max-width: 768px) {
   .container {
     text-align: center;
@@ -133,15 +185,17 @@ p {
     font-size: 1.4rem;
   }
 
-  /*carrousel*/
+  .carousel-btn {
+    display: none;
+  }
 
   .card-similar {
     min-width: 160px;
     max-width: 190px;
     font-size: 0.85rem;
   }
+
   .img-similar {
-    height: 80px;
-    margin-bottom: 0.3rem;
+    height: 90px;
   }
 }

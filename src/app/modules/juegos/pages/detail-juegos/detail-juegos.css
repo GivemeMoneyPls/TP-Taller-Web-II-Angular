@@ -68,6 +68,51 @@ p {
   height: 3rem;
 }
 
+.carousel-similar {
+  scroll-snap-type: x mandatory;
+  min-height: 260px;
+  padding-bottom: 1rem;
+}
+
+.card-similar {
+  width: 230px;
+  min-width: 220px;
+  max-width: 250px;
+  background-color: #191436;
+  border-radius: 0.85rem;
+  box-shadow: 0 4px 20px rgba(80, 0, 200, 0.12);
+  margin-bottom: 10px;
+  scroll-snap-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card-similar:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(120, 90, 246, 0.22);
+}
+.img-similar {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 12px rgba(40, 0, 80, 0.14);
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s;
+}
+.img-similar:hover {
+  transform: scale(1.04);
+}
+
+.card-similar h6 {
+  font-size: 1.08rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-similar p {
+  font-size: 0.92rem;
+  margin-bottom: 0.2rem;
+}
+
+
 /* Responsive */
 @media (max-width: 768px) {
   .container {
@@ -86,5 +131,17 @@ p {
 
   .text-primary {
     font-size: 1.4rem;
+  }
+
+  /*carrousel*/
+
+  .card-similar {
+    min-width: 160px;
+    max-width: 190px;
+    font-size: 0.85rem;
+  }
+  .img-similar {
+    height: 80px;
+    margin-bottom: 0.3rem;
   }
 }

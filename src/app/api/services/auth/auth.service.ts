@@ -65,4 +65,10 @@ export class AuthService {
   public getCurrentUser(): User | null {
     return this.user.getValue();
   }
+
+  public getCurrentUserId(): number | null {
+    const user = this.getCurrentUser();
+    
+    return user ? user.id : null; 
+  }
 }

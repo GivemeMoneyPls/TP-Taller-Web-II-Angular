@@ -47,7 +47,11 @@
                 [class.show]="isDropdownOpen">
           
               <li><a class="dropdown-item" href="#" (click)="closeDropdown()">Mi Perfil</a></li>
-              <li><a class="dropdown-item" href="#" (click)="closeDropdown()">Mis Compras</a></li>
+<li>
+               <a class="dropdown-item" [routerLink]="['/mis-compras']" (click)="closeDropdown()">
+                   Mis Compras
+               </a>
+             </li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <button (click)="logout()" class="dropdown-item" type="button">

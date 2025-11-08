@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Juego } from '../../interfaces/juego.interface';
 import { JuegoService } from '../../../../api/services/juego/juego.service';
 import { CarritoService } from '../../../../api/services/carrito/carrito.service';
@@ -15,10 +16,13 @@ import { JuegoFiltrosService } from '../../../../api/services/juego-filtros/jueg
 })
 export class ListJuegos {
 
-  juegos:Juego[] = [];
+  juegos: Juego[] = [];
+  mensajeExito: string | null = null;
 
   juegoService = inject(JuegoService);
   carritoService = inject(CarritoService);
+  router = inject(Router);
+
   juegoFiltrosService = inject(JuegoFiltrosService);
 
   ngOnInit(): void {
@@ -30,7 +34,7 @@ export class ListJuegos {
     });
   }
 
-  listJuegos(){
+  listJuegos() {
     this.juegoService.getJuegos().subscribe({
       next: (juegos) => {
         this.juegos = juegos;
@@ -38,6 +42,9 @@ export class ListJuegos {
       },
       error: (error) => {
         console.error('Error al obtener los juegos:', error);
+      },
+      complete: () => {
+        console.log('Solicitud de juegos completada.');
       }
     });
   }
@@ -48,11 +55,18 @@ export class ListJuegos {
 
     this.carritoService.agregarAlCarrito(juegoId, usuarioId).subscribe({
       next: (response) => {
-        console.log('Juego agregado al carrito con exito:', response);
+        this.mensajeExito = response.message;
+        console.log('Juego agregado al carrito con éxito:', response);
+        setTimeout(() => this.mensajeExito = null, 3000);
       },
       error: (error) => {
         console.error('Error al agregar al carrito:', error);
       }
     });
   }
+
+  verDetalle(juegoId: number) {
+    this.router.navigate(['/juego', juegoId]);
+  }
+
 }

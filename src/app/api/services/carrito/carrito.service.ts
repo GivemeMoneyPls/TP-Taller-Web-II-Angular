@@ -16,4 +16,15 @@ export class CarritoService {
     { juegoId, usuarioId }
   );
 }
+  getCarrito(usuarioId: number): Observable<CarritoItem[]> {
+      return this.httpClient.get<CarritoItem[]>(
+        `${environment.API_URL_CARRITO}/${usuarioId}`
+      );
+  }
+  eliminarDelCarrito(juegoId: number, usuarioId: number): Observable<any> {
+  return this.httpClient.post<any>(
+    `${environment.API_URL_CARRITO}/eliminar`,
+    { juegoId, usuarioId }
+  );
+  }
 }

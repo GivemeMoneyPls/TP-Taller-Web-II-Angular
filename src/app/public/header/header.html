@@ -34,7 +34,7 @@
         @if (user$ | async; as currentUser) {
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" 
+            <a class="nav-link dropdown-toggle d-flex align-items-center" type="button" role="button" 
                (click)="toggleDropdown()">
 
               <div class="user-avatar me-2">
@@ -47,7 +47,11 @@
                 [class.show]="isDropdownOpen">
           
               <li><a class="dropdown-item" href="#" (click)="closeDropdown()">Mi Perfil</a></li>
-              <li><a class="dropdown-item" href="#" (click)="closeDropdown()">Mis Compras</a></li>
+<li>
+               <a class="dropdown-item" [routerLink]="['/mis-compras']" (click)="closeDropdown()">
+                   Mis Compras
+               </a>
+             </li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <button (click)="logout()" class="dropdown-item" type="button">

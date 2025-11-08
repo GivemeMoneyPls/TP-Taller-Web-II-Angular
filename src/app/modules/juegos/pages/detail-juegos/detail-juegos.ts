@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { Juego } from '../../interfaces/juego.interface';
@@ -20,7 +20,10 @@ export class DetailJuegos implements OnInit {
   juegosSimilares: Juego[] = [];
   loading = true;
 
+  @ViewChild('carouselTrack', { static: false }) carouselTrack!: ElementRef<HTMLDivElement>;
+
   ngOnInit(): void {
+
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
       if (id) {
@@ -50,5 +53,15 @@ export class DetailJuegos implements OnInit {
 
   verDetalle(juegoId: number) {
     this.router.navigate(['/juego', juegoId]);
+  }
+
+   scrollLeft() {
+    if (this.carouselTrack)
+      this.carouselTrack.nativeElement.scrollBy({ left: -300, behavior: 'smooth' });
+  }
+
+  scrollRight() {
+    if (this.carouselTrack)
+      this.carouselTrack.nativeElement.scrollBy({ left: 300, behavior: 'smooth' });
   }
 }

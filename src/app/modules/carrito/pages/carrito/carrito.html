@@ -63,9 +63,13 @@
     <strong>{{ total | currency }}</strong>
     </div>
     <div class="finalizar-wrapper">
-      <button class="btn btn-finalizar btn-lg px-5">
+    <button 
+        class="btn btn-finalizar btn-lg px-5" 
+        [routerLink]="['/pago']" 
+        [disabled]="total <= 0">
         <i class="bi bi-credit-card me-2"></i> Comprar
-      </button>
-    </div>
+    </button>
+
+  </div>
   </div>
 </div>

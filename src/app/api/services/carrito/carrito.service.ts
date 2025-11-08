@@ -27,4 +27,10 @@ export class CarritoService {
     { juegoId, usuarioId }
   );
   }
+  vaciarCarrito(usuarioId: number): Observable<any> {
+  return this.httpClient.delete<any>(
+    `${environment.API_URL_CARRITO}/vaciar/${usuarioId}`
+  );
+}
+
 }

@@ -35,7 +35,7 @@
   padding: 1rem 1.2rem;
   transition: all 0.25s ease;
   position: relative;
-  flex-wrap: wrap; /* ✅ ayuda al responsive */
+  flex-wrap: wrap; 
 }
 
 .game-card:hover {
@@ -102,7 +102,7 @@
   background: linear-gradient(135deg, #a217da, #7d0baa);
   color: #fff;
   font-weight: 800;
-  font-size: 1.1rem; /* 🔹 más chico */
+  font-size: 1.1rem; 
   padding: 4px 10px;
   border-radius: 50%;
   box-shadow: 0 3px 10px rgba(60, 13, 189, 0.4);
@@ -162,15 +162,24 @@
 }
 .alert-fixed {
   position: fixed;
-  top: 20px; /* distancia desde arriba */
+  top: 20px; 
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999; /* para que quede por encima de todo */
+  z-index: 9999; 
   width: auto;
   max-width: 400px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+
+.btn-finalizar:disabled {
+  background-color: #6b7280; 
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .game-card {

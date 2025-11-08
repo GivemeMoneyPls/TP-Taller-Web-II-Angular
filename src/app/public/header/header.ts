@@ -23,6 +23,7 @@ export class Header {
   }
 
   logout() {
+    localStorage.removeItem('juegoFiltrosGuardados');
     this.closeDropdown(); 
     this.authService.logout();
   }

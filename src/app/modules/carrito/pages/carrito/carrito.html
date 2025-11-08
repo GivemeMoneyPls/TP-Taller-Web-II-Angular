@@ -1,0 +1,71 @@
+<div class="carrito-page">
+  <div *ngIf="mensaje" class="alert alert-success alert-fixed">
+    {{ mensaje }}
+  </div>
+
+  <div class="container py-4">
+    <h2 class="text-light mb-4 text-center">🛒 Tu carrito</h2>
+
+    <div class="carrito-lista">
+      @for (juego of juegos; track juego.juego.id) {
+        <div class="game-card shadow-sm">
+          <!-- Cantidad -->
+          <span class="cantidad-badge" *ngIf="juego.cantidad > 1">
+            ×{{ juego.cantidad }}
+          </span>
+
+          <!-- Imagen -->
+          <div class="game-img-wrapper">
+            <img
+              [src]="juego.juego.imagen_url"
+              class="card-img-top"
+              [alt]="juego.juego.titulo"
+            />
+          </div>
+
+          <!-- Información -->
+          <div class="card-body text-light">
+            <h5 class="fw-bold mb-1">{{ juego.juego.titulo }}</h5>
+            <p class="text-secondary small mb-2">
+              {{ juego.juego.plataforma.nombre }} •
+              {{ juego.juego.juego_genero | generosPipe }}
+            </p>
+            <!-- Botón estilo enlace -->
+          <button class="btn-link-eliminar" (click)="eliminarDelCarrito(juego)">
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+
+          </div>
+
+        
+          <!-- Precio + Subtotal -->
+            <div class="precio">
+            <p class="fw-semibold text-primary fs-5 mb-1">
+                Precio: {{ juego.juego.precio | currency }}
+            </p>
+            <p class="text-light">
+                Subtotal: {{ (+juego.juego.precio * +juego.cantidad) | currency }}
+            </p>
+            </div>
+
+
+        </div>
+      }
+      @empty {
+        <p class="text-center text-light mt-4">
+          No hay juegos en el carrito.
+        </p>
+      }
+    </div>
+    <br>
+    <div class="total-carrito">
+    <span>Totala pagar: </span>
+    <strong>{{ total | currency }}</strong>
+    </div>
+    <div class="finalizar-wrapper">
+      <button class="btn btn-finalizar btn-lg px-5">
+        <i class="bi bi-credit-card me-2"></i> Comprar
+      </button>
+    </div>
+  </div>
+</div>

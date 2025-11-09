@@ -110,7 +110,7 @@ sendJuego() {
       imagen_url: this.form.get('imagen_url')?.value.trim(),
       generos: this.form.get('generos')?.value,
       plataforma_id: Number(this.form.get('plataforma_id')?.value),
-      fecha_lanzamiento: this.form.get('fecha_lanzamiento')?.value
+      fecha_lanzamiento: new Date(this.form.get('fecha_lanzamiento')?.value)
     };
     console.log('Juego a enviar desde el formulario:', juegoAEnviar);
 

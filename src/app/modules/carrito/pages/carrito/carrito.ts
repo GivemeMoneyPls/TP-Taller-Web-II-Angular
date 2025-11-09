@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CarritoService } from '../../../../api/services/carrito/carrito.service';
 import { CarritoItem } from '../../interfaces/carrito.interface';
 import { GenerosPipe } from '../../../../modules/juegos/pipes/generos-pipe';
 
 @Component({
   selector: 'app-carrito',
-  imports: [CommonModule, CurrencyPipe, GenerosPipe],
+  imports: [CommonModule, CurrencyPipe, GenerosPipe, RouterModule],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css',
 })
@@ -22,7 +22,7 @@ export class Carrito {
 
   ngOnInit(): void {
     const usuario = JSON.parse(localStorage.getItem('app_user') || '{}');
-
+    
   
     if (!usuario.id) {
       this.router.navigate(['/signin']);
@@ -36,7 +36,9 @@ export class Carrito {
     this.carritoService.getCarrito(usuarioId).subscribe({
       next: (carrito) => {
         this.juegos = carrito;
-        this.calcularTotal(); // 💰 Calcula total al cargar
+        this.calcularTotal(); 
+        localStorage.setItem('carrito_total', this.total.toString());
+
         console.log('Carrito obtenido:', this.juegos);
       },
       error: (error) => {
@@ -54,6 +56,7 @@ export class Carrito {
       const precio = Number(item.juego.precio) || 0;
       return sum + precio * item.cantidad;
     }, 0);
+    localStorage.setItem('carrito_total', this.total.toString());
   }
 
   eliminarDelCarrito(item: CarritoItem): void {
@@ -63,6 +66,7 @@ export class Carrito {
     this.juegos = this.juegos.filter(j => j.juego.id !== item.juego.id);
   }
   this.calcularTotal();
+
   const usuario = JSON.parse(localStorage.getItem('app_user') || '{}');
   this.carritoService.eliminarDelCarrito(item.juego.id, usuario.id).subscribe({
     next: () => {

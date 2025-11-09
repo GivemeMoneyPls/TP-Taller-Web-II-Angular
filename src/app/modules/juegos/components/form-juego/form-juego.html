@@ -1,0 +1,111 @@
+<div class="container-fluid py-4 update-bg">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+
+      <div class="card update-card p-4">
+        <h3 class="fw-bold text-light mb-4">Actualizar Juego</h3>
+
+        <form [formGroup]="form" (ngSubmit)="sendJuego()">
+
+          <!-- Título -->
+          <div class="mb-3">
+            <label class="form-label text-light fw-semibold">Título</label>
+            <input
+              type="text"
+              class="form-control form-input"
+              formControlName="titulo"
+              placeholder="Título del juego"
+            />
+          </div>
+
+          <!-- Fecha lanzamiento -->
+          <div class="mb-3">
+            <label class="form-label text-light fw-semibold">Fecha de lanzamiento</label>
+            <input
+              type="date"
+              class="form-control form-input"
+              formControlName="fecha_lanzamiento"
+            />
+          </div>
+
+          <!-- Precio -->
+          <div class="mb-3">
+            <label class="form-label text-light fw-semibold">Precio (USD)</label>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              class="form-control form-input"
+              formControlName="precio"
+              placeholder="0.00"
+            />
+          </div>
+
+          <!-- Descripción -->
+          <div class="mb-3">
+            <label class="form-label text-light fw-semibold">Descripción</label>
+            <textarea
+              rows="4"
+              class="form-control form-input"
+              formControlName="descripcion"
+              placeholder="Descripción del juego"
+            ></textarea>
+          </div>
+
+          <!-- Imagen URL -->
+          <div class="mb-3">
+            <label class="form-label text-light fw-semibold">URL de la imagen</label>
+            <input
+              type="text"
+              class="form-control form-input"
+              formControlName="imagen_url"
+              placeholder="https://imagen.com/juego.jpg"
+            />
+          </div>
+
+          <!-- Plataforma -->
+          <div class="mb-3">
+            <label class="form-label text-light fw-semibold">Plataforma</label>
+            <select
+              class="form-select form-input select-custom"
+              formControlName="plataforma_id"
+            >
+            @for (plataforma of plataformas; track plataforma.id) {
+              <option [value]="plataforma.id">{{ plataforma.nombre }}</option>
+            }
+
+            </select>
+          </div>
+
+          <!-- Géneros -->
+          <div class="mb-4">
+            <label class="form-label text-light fw-semibold">Géneros</label>
+
+            <div class="genero-flex">
+              @for (genero of generos; track genero.id) {
+                <label class="genero-item text-light">
+                  <input
+                    type="checkbox"
+                    [value]="genero.id"
+                    (change)="onGeneroChange($event)"
+                    [checked]="form.value.generos.includes(genero.id)"
+                  />
+                  <span>{{ genero.nombre }}</span>
+                </label>
+              }
+            </div>
+          </div>
+
+          <!-- Botón -->
+          <button class="btn btn-primary w-100 fw-semibold py-2">
+            <i class="bi bi-pencil-square me-2"></i>
+            Actualizar Juego
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Juego } from '../../interfaces/juego.interface';
@@ -7,14 +7,19 @@ import { CarritoService } from '../../../../api/services/carrito/carrito.service
 import { GenerosPipe } from '../../pipes/generos-pipe';
 import { CurrencyPipe } from '@angular/common';
 import { JuegoFiltrosService } from '../../../../api/services/juego-filtros/juego-filtros.service';
+import { Spinner } from "../../../../shared/components/spinner/spinner";
 
 @Component({
   selector: 'app-list-juegos',
-  imports: [CommonModule, GenerosPipe, CurrencyPipe],
+  imports: [CommonModule, GenerosPipe, CurrencyPipe, Spinner],
   templateUrl: './list-juegos.html',
   styleUrl: './list-juegos.css',
 })
 export class ListJuegos {
+
+  spinner = true;
+
+  gestionar = input<Boolean>(false);
 
   juegos: Juego[] = [];
   mensajeExito: string | null = null;
@@ -45,6 +50,7 @@ export class ListJuegos {
       },
       complete: () => {
         console.log('Solicitud de juegos completada.');
+        this.spinner = false;
       }
     });
   }
@@ -67,6 +73,10 @@ export class ListJuegos {
 
   verDetalle(juegoId: number) {
     this.router.navigate(['/juego', juegoId]);
+  }
+
+  actualizarJuego(juegoId: number) {
+    this.router.navigate(['/actualizar-juegos', juegoId]);
   }
 
 }

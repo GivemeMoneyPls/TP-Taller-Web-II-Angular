@@ -6,6 +6,8 @@ import { SigninComponent } from './modules/auth/pages/signin/signin';
 import { MisComprasComponent } from './modules/mis-compras/mis-compras.component';
 
 import { Carrito } from './modules/carrito/pages/carrito/carrito';
+import { GestionarJuegos } from './modules/juegos/pages/gestionar-juegos/gestionar-juegos';
+import { UpdateJuegos } from './modules/juegos/pages/update-juegos/update-juegos';
 export const routes: Routes = [
 
     {
@@ -29,19 +31,28 @@ export const routes: Routes = [
     component: DetailJuegos
   },
 
-   { path: 'mis-compras', 
-      component: MisComprasComponent 
+   { path: 'mis-compras',
+      component: MisComprasComponent
   },
 
-  
+
   {
     path: 'carrito',
     component: Carrito
+  },
+
+  {
+    path: 'gestionar-juegos',
+    component: GestionarJuegos
+  },
+  {
+    path: 'actualizar-juegos/:id',
+    component: UpdateJuegos
   },
     {
       path: '**',
       redirectTo: ''
     },
 
-  
+
 ];

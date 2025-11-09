@@ -76,3 +76,37 @@
   max-width: 600px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+
+
+/* Card de creación */
+.create-card {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 2px dashed #a78bfa;
+  border-radius: 1rem;
+  color: #c4b5fd;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 1.1rem;
+}
+
+.create-card:hover {
+  background-color: rgba(167, 139, 250, 0.1);
+  border-color: #c4b5fd;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.3);
+}
+
+.create-card:active {
+  transform: scale(0.97);
+}
+
+.create-icon {
+  font-size: 2.8rem;
+  color: #d8b4fe;
+}
+
+/* Para que tenga exactamente la misma estética que tus cards */
+.create-card span {
+  font-weight: 600;
+  color: #e9d5ff;
+}

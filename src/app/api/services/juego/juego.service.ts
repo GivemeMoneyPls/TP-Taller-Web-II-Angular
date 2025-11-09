@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Juego } from '../../../modules/juegos/interfaces/juego.interface';
+import { Juego, JuegoDTO } from '../../../modules/juegos/interfaces/juego.interface';
 import { environment } from '../../../../environments/environment.development';
 
 @Injectable({
@@ -25,5 +25,9 @@ export class JuegoService {
       `${environment.API_URL_GAME}similares/${idActual}?generos=${generosParam}`
     );
 }
+
+  updateJuego(juego:JuegoDTO){
+     return this.httpClient.put<Juego[]>(`${environment.API_URL_GAME}${juego.id}`, juego);
+  }
 
 }

@@ -43,7 +43,9 @@ export class SigninComponent {
 
     this.authService.loginUser(loginData).subscribe({
       next: (response) => {
-        this.notificationService.show('success', `¡Bienvenido, ${response.user.nombre}!`);
+        const currentUser = this.authService.getCurrentUser();
+        const nombre  = currentUser ? currentUser.nombre : 'Usuario';
+        this.notificationService.show('success', `¡Bienvenido, ${nombre}!`);
         this.router.navigate(['/']); 
       },
       error: (err) => {

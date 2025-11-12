@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CarritoService } from '../../../../api/services/carrito/carrito.service';
 import { CarritoItem } from '../../interfaces/carrito.interface';
 import { GenerosPipe } from '../../../../modules/juegos/pipes/generos-pipe';
+import { AuthService } from '../../../../api/services/auth/auth.service';
 
 @Component({
   selector: 'app-carrito',
@@ -19,12 +20,13 @@ export class Carrito {
 
   carritoService = inject(CarritoService);
   router = inject(Router);
+  authService = inject(AuthService);
 
   ngOnInit(): void {
-    const usuario = JSON.parse(localStorage.getItem('app_user') || '{}');
+    const usuario = this.authService.getCurrentUser();
     
   
-    if (!usuario.id) {
+    if (!usuario) {
       this.router.navigate(['/signin']);
       return;
     }
@@ -67,13 +69,17 @@ export class Carrito {
   }
   this.calcularTotal();
 
-  const usuario = JSON.parse(localStorage.getItem('app_user') || '{}');
-  this.carritoService.eliminarDelCarrito(item.juego.id, usuario.id).subscribe({
-    next: () => {
-      this.mensaje = 'Producto eliminado del carrito';
-      setTimeout(() => this.mensaje = null, 2000);
-    },
-    error: (err) => console.error('Error al eliminar del carrito:', err)
-  });
+  const usuario = this.authService.getCurrentUser();
+  if (usuario) {
+    this.carritoService.eliminarDelCarrito(item.juego.id, usuario.id).subscribe({
+      next: () => {
+        this.mensaje = 'Producto eliminado del carrito';
+        setTimeout(() => this.mensaje = null, 2000);
+      },
+      error: (err) => console.error('Error al eliminar del carrito:', err)
+    });
+  } else {
+    console.error('Usuario no autenticado');
+  }
 }
 }

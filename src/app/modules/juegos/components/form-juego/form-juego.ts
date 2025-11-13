@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { JuegoService } from '../../../../api/services/juego/juego.service';
 import { Juego, Genero, Plataforma, JuegoDTO } from '../../interfaces/juego.interface';
 import { FilterService } from '../../../../api/services/filter/filter.service';
+import { UploadService } from '../../../../api/services/upload/upload.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-form-juego',
@@ -30,9 +32,17 @@ export class FormJuego {
 
     servicioFiltro = inject(FilterService);
 
+    servicioUpload = inject(UploadService)
+
     juego = input<Juego>();
 
     eventEmitterFormJuego = output<JuegoDTO>();
+
+    selectedFile: File | null = null;
+
+    previewUrl: string | ArrayBuffer | null = null;
+
+    imagenUrlFinal: string | undefined;
 
     ngOnInit(){
       console.log('Juego recibido en el formulario:', this.juego());
@@ -45,7 +55,6 @@ export class FormJuego {
           titulo: [this.juego()?.titulo, [Validators.required]],
           descripcion: [this.juego()?.descripcion, [Validators.required]],
           precio: [this.juego()?.precio, [Validators.required]],
-          imagen_url: [this.juego()?.imagen_url, [Validators.required]],
           generos: [this.juego()?.juego_genero?.map(g => g.genero_id) ?? [], [Validators.required]],
           plataforma_id: [this.juego()?.plataforma_id, [Validators.required]],
           fecha_lanzamiento: [this.convertirFecha(this.juego()?.fecha_lanzamiento), [Validators.required]]
@@ -88,6 +97,20 @@ export class FormJuego {
   return fecha.toISOString().split('T')[0];
 }
 
+onFileSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    this.selectedFile = input.files[0];
+
+    // Mostrar una vista previa
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.previewUrl = reader.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
+  }
+}
+
 onGeneroChange(event: any) {
   const generoId = Number(event.target.value);
   const generosSeleccionados = this.form.get('generos')?.value ?? [];
@@ -101,13 +124,25 @@ onGeneroChange(event: any) {
   }
 }
 
-sendJuego() {
-    const juegoAEnviar: JuegoDTO = {
+async sendJuego() {
+
+    if (this.selectedFile) {
+       try {
+      this.imagenUrlFinal = await firstValueFrom(this.servicioUpload.uploadImage(this.selectedFile));
+      console.log('Imagen subida correctamente:', this.imagenUrlFinal);
+    } catch (error) {
+      console.error('Error al subir imagen:', error);
+      return; // no seguimos si falla la subida
+    }
+
+  }
+
+      const juegoAEnviar: JuegoDTO = {
       id: this.id,
       titulo: this.form.get('titulo')?.value.trim(),
       descripcion: this.form.get('descripcion')?.value,
       precio: this.form.get('precio')?.value,
-      imagen_url: this.form.get('imagen_url')?.value.trim(),
+      imagen_url: this.imagenUrlFinal,
       generos: this.form.get('generos')?.value,
       plataforma_id: Number(this.form.get('plataforma_id')?.value),
       fecha_lanzamiento: new Date(this.form.get('fecha_lanzamiento')?.value)
@@ -116,6 +151,5 @@ sendJuego() {
 
     this.eventEmitterFormJuego.emit(juegoAEnviar);
 
-  }
-
+}
 }

@@ -1,0 +1,84 @@
+<div class="profile-wrapper">
+  <div class="form-card">
+    
+    <h2 class="form-title">Mi Perfil</h2>
+    
+    <div class="text-center mb-4">
+      <div class="profile-avatar-lg">
+        {{ currentUser?.nombre?.charAt(0) | uppercase }}
+      </div>
+      <p class="text-white-50 mt-2">{{ currentUser?.email }}</p>
+    </div>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control custom-input" formControlName="nombre">
+          @if (profileForm.get('nombre')?.invalid && profileForm.get('nombre')?.touched) {
+            <small class="text-danger">El nombre es obligatorio.</small>
+          }
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Apellido</label>
+          <input type="text" class="form-control custom-input" formControlName="apellido">
+          @if (profileForm.get('apellido')?.invalid && profileForm.get('apellido')?.touched) {
+            <small class="text-danger">El apellido es obligatorio.</small>
+          }
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Dirección</label>
+        <input type="text" class="form-control custom-input" formControlName="direccion">
+        @if (profileForm.get('direccion')?.invalid && profileForm.get('direccion')?.touched) {
+            <small class="text-danger">La dirección es obligatoria.</small>
+        }
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control custom-input disabled-input" formControlName="email">
+      </div>
+
+      <hr class="border-secondary my-4">
+
+      <h5 class="text-white mb-3">Cambiar Contraseña</h5>
+
+      <div class="mb-3">
+        <label class="form-label">Contraseña Actual</label>
+        <input type="password" class="form-control custom-input" formControlName="currentPassword" placeholder="Ingresa tu contraseña actual">
+        @if (profileForm.hasError('currentPasswordRequired') && profileForm.get('newPassword')?.touched) {
+          <small class="text-danger">Debes ingresar tu contraseña actual para confirmar cambios.</small>
+        }
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Nueva Contraseña</label>
+          <input type="password" class="form-control custom-input" formControlName="newPassword">
+          @if (profileForm.get('newPassword')?.hasError('minlength')) {
+            <small class="text-danger">Mínimo 8 caracteres.</small>
+          }
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Confirmar Nueva</label>
+          <input type="password" class="form-control custom-input" formControlName="confirmPassword">
+        </div>
+      </div>
+
+      @if (profileForm.hasError('passwordMismatch') && profileForm.get('confirmPassword')?.touched) {
+        <div class="alert alert-danger py-2 mt-2">
+          <small>Las contraseñas nuevas no coinciden.</small>
+        </div>
+      }
+
+      <button type="submit" class="btn btn-primary w-100 mt-3 py-2 fw-bold" 
+        [disabled]="profileForm.invalid || profileForm.pristine">
+        Guardar Cambios
+      </button>
+
+    </form>
+  </div>
+</div>

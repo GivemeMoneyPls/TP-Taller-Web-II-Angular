@@ -8,6 +8,8 @@ import { Carrito } from './modules/carrito/pages/carrito/carrito';
 import { GestionarJuegos } from './modules/juegos/pages/gestionar-juegos/gestionar-juegos';
 import { UpdateJuegos } from './modules/juegos/pages/update-juegos/update-juegos';
 import { Pago} from './modules/carrito/pages/pago/pago';
+import { ProfileComponent } from './modules/auth/pages/profile/profile';
+
 export const routes: Routes = [
 
     {
@@ -25,6 +27,10 @@ export const routes: Routes = [
       component: SigninComponent
     },
 
+    {
+      path: 'profile',
+      component: ProfileComponent
+    },
 
     {
     path: 'juego/:id',
@@ -34,7 +40,6 @@ export const routes: Routes = [
    { path: 'mis-compras',
       component: MisComprasComponent
   },
-
 
   {
     path: 'carrito',

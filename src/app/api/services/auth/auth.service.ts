@@ -43,6 +43,22 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
+  updateProfile(userId: number, data: any): Observable<any> {
+    const body = { id: userId, ...data };
+
+    return this.httpClient.put<{ token: string }>(`${this.apiUrl}/update`, body)
+      .pipe(
+        tap(response => {
+          const newToken = response.token;
+
+          localStorage.setItem('app_token', newToken);
+
+          const decodedUser = this.getUserFromToken();
+          this.user.next(decodedUser);
+        })
+      );
+  }
+
   private getUserFromToken(): User | null {
     const token = localStorage.getItem('app_token');
 

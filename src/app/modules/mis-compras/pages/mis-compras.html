@@ -20,7 +20,10 @@
            
             <li *ngFor="let item of pedido.pedido_juego" class="list-group-item d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img [src]="item.juego.imagen_url" alt="{{ item.juego.titulo }}" class="img-thumbnail me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                  <img [src]="'http://localhost:3000' + item.juego.imagen_url" 
+     alt="{{ item.juego.titulo }}" 
+     class="img-thumbnail me-3" 
+     style="width: 60px; height: 60px; object-fit: cover;">
                     <span>{{ item.juego.titulo }}</span>
                 </div>
                 <div class="text-end">

@@ -33,11 +33,7 @@ export class MisComprasComponent implements OnInit {
     
     if (usuarioId) {
       this.cargarMisPedidos(usuarioId); 
-    } else {
-      
-      this.error = "Por favor, inicia sesión para ver tus compras.";
-      this.isLoading = false;
-    }
+    } 
   }
     
   

@@ -8,6 +8,7 @@ import { GenerosPipe } from '../../pipes/generos-pipe';
 import { CurrencyPipe } from '@angular/common';
 import { JuegoFiltrosService } from '../../../../api/services/juego-filtros/juego-filtros.service';
 import { Spinner } from "../../../../shared/components/spinner/spinner";
+import { AuthService } from '../../../../api/services/auth/auth.service';
 import { SearchService } from '../../../../api/services/search/search.service';
 
 @Component({
@@ -30,6 +31,8 @@ export class ListJuegos {
   juegoService = inject(JuegoService);
   carritoService = inject(CarritoService);
   router = inject(Router);
+  authService = inject(AuthService);
+
   route = inject(ActivatedRoute);
   juegoFiltrosService = inject(JuegoFiltrosService);
   searchService = inject(SearchService);
@@ -92,19 +95,24 @@ export class ListJuegos {
   }
 
   agregarAlCarrito(juegoId: number) {
-    const usuario = JSON.parse(localStorage.getItem('app_user') || '{}');
-    const usuarioId = usuario.id;
+    const usuario = this.authService.getCurrentUser();
+    if (usuario) {
+      const usuarioId = usuario.id;
 
-    this.carritoService.agregarAlCarrito(juegoId, usuarioId).subscribe({
-      next: (response) => {
-        this.mensajeExito = response.message;
-        console.log('Juego agregado al carrito con éxito:', response);
-        setTimeout(() => this.mensajeExito = null, 3000);
-      },
-      error: (error) => {
-        console.error('Error al agregar al carrito:', error);
-      }
-    });
+      this.carritoService.agregarAlCarrito(juegoId, usuarioId).subscribe({
+        next: (response) => {
+          this.mensajeExito = response.message;
+          console.log('Juego agregado al carrito con éxito:', response);
+          setTimeout(() => this.mensajeExito = null, 3000);
+        },
+        error: (error) => {
+          console.error('Error al agregar al carrito:', error);
+        }
+      });
+    } else {
+      console.error('Usuario no autenticado');
+      this.router.navigate(['/signin']);
+    }
   }
 
   verDetalle(juegoId: number) {

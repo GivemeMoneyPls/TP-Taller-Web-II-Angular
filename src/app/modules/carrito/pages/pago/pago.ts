@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
 import { CarritoService } from '../../../../api/services/carrito/carrito.service'; 
+import { AuthService } from '../../../../api/services/auth/auth.service';
 
 @Component({
   selector: 'app-pago',
@@ -17,6 +18,7 @@ export class Pago {
 
   router = inject(Router);
   carritoService = inject(CarritoService);
+  authService = inject(AuthService);
 
   ngOnInit(): void {
     const totalGuardado = localStorage.getItem('carrito_total');
@@ -31,9 +33,9 @@ export class Pago {
   }
 
   finalizarCompra() {
-    const usuario = JSON.parse(localStorage.getItem('app_user') || '{}');
+    const usuario = this.authService.getCurrentUser();
 
-    if (!usuario.id) {
+    if (!usuario) {
       this.mensajeError = 'Debes iniciar sesión para finalizar la compra.';
       setTimeout(() => (this.mensajeError = null), 4000);
       this.router.navigate(['/signin']);

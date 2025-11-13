@@ -73,7 +73,8 @@ export class AuthService {
         nombre: decoded.nombre,
         apellido: decoded.apellido || '',
         direccion: decoded.direccion || '',
-        contrase_a: ''
+        contrase_a: '',
+        admin: decoded.admin || false
       };
     } catch (error) {
       console.error('Error al decodificar token', error);

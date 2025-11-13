@@ -1,7 +1,7 @@
 <div *ngIf="!loading && juego" class="container py-5 text-light">
   <div class="row align-items-center">
     <div class="col-md-5 text-center mb-4 mb-md-0">
-      <img [src]="juego.imagen_url" class="img-fluid rounded shadow" [alt]="juego.titulo" />
+      <img [src]="'http://localhost:3000' + juego.imagen_url" class="img-fluid rounded shadow" [alt]="juego.titulo" />
     </div>
     <div class="col-md-7">
       <h2 class="fw-bold mb-3">{{ juego.titulo }}</h2>
@@ -39,7 +39,7 @@
         (click)="verDetalle(js.id)"
         style="cursor: pointer;"
       >
-        <img [src]="js.imagen_url" class="img-similar mb-2" [alt]="js.titulo" />
+        <img [src]="'http://localhost:3000' + js.imagen_url" class="img-similar mb-2" [alt]="js.titulo" />
         <h6 class="fw-bold text-light mb-1">{{ js.titulo }}</h6>
         <p class="text-secondary small">
           <span *ngFor="let g of js.juego_genero; let last = last">

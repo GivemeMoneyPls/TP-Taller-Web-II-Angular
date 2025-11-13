@@ -17,6 +17,11 @@ import { Spinner } from "../../../../shared/components/spinner/spinner";
 })
 export class ListJuegos {
 
+
+eliminarJuego(arg0: number) {
+throw new Error('Method not implemented.');
+}
+
   spinner = true;
 
   gestionar = input<Boolean>(false);

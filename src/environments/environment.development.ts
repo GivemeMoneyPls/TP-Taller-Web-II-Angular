@@ -4,4 +4,5 @@ export const environment = {
   API_URL_GENERO : "http://localhost:3000/api/genero/",
   API_URL_AUTH : "http://localhost:3000/api/auth",
   API_URL_CARRITO : "http://localhost:3000/api/carrito",
+  API_URL_UPLOAD : "http://localhost:3000/api/upload/",
 };

@@ -17,7 +17,7 @@
           <!-- Imagen -->
           <div class="game-img-wrapper">
             <img
-              [src]="juego.juego.imagen_url"
+              [src]="'http://localhost:3000' + juego.juego.imagen_url"
               class="card-img-top"
               [alt]="juego.juego.titulo"
             />
@@ -37,7 +37,7 @@
 
           </div>
 
-        
+
           <!-- Precio + Subtotal -->
             <div class="precio">
             <p class="fw-semibold text-primary fs-5 mb-1">
@@ -63,9 +63,9 @@
     <strong>{{ total | currency }}</strong>
     </div>
     <div class="finalizar-wrapper">
-    <button 
-        class="btn btn-finalizar btn-lg px-5" 
-        [routerLink]="['/pago']" 
+    <button
+        class="btn btn-finalizar btn-lg px-5"
+        [routerLink]="['/pago']"
         [disabled]="total <= 0">
         <i class="bi bi-credit-card me-2"></i> Comprar
     </button>

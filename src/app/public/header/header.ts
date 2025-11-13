@@ -1,18 +1,38 @@
-import { Component, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, inject, OnInit  } from '@angular/core';
+import { Router, RouterModule, NavigationEnd  } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { filter } from 'rxjs/operators';
 import { AuthService } from '../../api/services/auth/auth.service';
+import { SearchService } from '../../api/services/search/search.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, FormsModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {
+export class Header implements OnInit{
   authService = inject(AuthService);
   user$ = this.authService.user$;
-  isDropdownOpen = false; 
+  searchService = inject(SearchService);
+  router = inject(Router);
+
+  searchTerm = '';
+  isDropdownOpen = false;
+
+
+  ngOnInit() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        if (!event.url.includes('/juegos')) {
+          this.searchTerm = '';
+          this.searchService.setSearchTerm('');
+        }
+      });
+  }
+
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -24,7 +44,28 @@ export class Header {
 
   logout() {
     localStorage.removeItem('juegoFiltrosGuardados');
-    this.closeDropdown(); 
+    this.searchService.setSearchTerm('');
+    this.closeDropdown();
     this.authService.logout();
+  }
+
+
+  onSearchChange(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchTerm = value;
+
+    this.searchService.setSearchTerm(value);
+
+    if (!this.router.url.includes('/juegos') && value.trim() !== '') {
+      this.router.navigate(['/juegos'], { queryParams: { q: value } });
+    }
+  }
+
+  onSearchSubmit() {
+    if (this.router.url.includes('/juegos')) {
+      this.searchService.setSearchTerm(this.searchTerm);
+    } else {
+      this.router.navigate(['/juegos'], { queryParams: { q: this.searchTerm } });
+    }
   }
 }

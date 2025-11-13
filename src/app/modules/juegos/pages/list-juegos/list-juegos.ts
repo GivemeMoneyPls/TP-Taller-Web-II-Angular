@@ -1,6 +1,6 @@
 import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Juego } from '../../interfaces/juego.interface';
 import { JuegoService } from '../../../../api/services/juego/juego.service';
 import { CarritoService } from '../../../../api/services/carrito/carrito.service';
@@ -9,6 +9,7 @@ import { CurrencyPipe } from '@angular/common';
 import { JuegoFiltrosService } from '../../../../api/services/juego-filtros/juego-filtros.service';
 import { Spinner } from "../../../../shared/components/spinner/spinner";
 import { AuthService } from '../../../../api/services/auth/auth.service';
+import { SearchService } from '../../../../api/services/search/search.service';
 
 @Component({
   selector: 'app-list-juegos',
@@ -18,11 +19,13 @@ import { AuthService } from '../../../../api/services/auth/auth.service';
 })
 export class ListJuegos {
 
+
   spinner = true;
 
   gestionar = input<Boolean>(false);
 
   juegos: Juego[] = [];
+  todosLosJuegos: Juego[] = []; //copia
   mensajeExito: string | null = null;
 
   juegoService = inject(JuegoService);
@@ -30,7 +33,10 @@ export class ListJuegos {
   router = inject(Router);
   authService = inject(AuthService);
 
+  route = inject(ActivatedRoute);
   juegoFiltrosService = inject(JuegoFiltrosService);
+  searchService = inject(SearchService);
+
 
   ngOnInit(): void {
     this.listJuegos();
@@ -39,12 +45,22 @@ export class ListJuegos {
     this.juegoFiltrosService.juegos$.subscribe(juegos => {
       this.juegos = juegos;
     });
+
+    this.searchService.searchTerm$.subscribe(term => {
+      this.filtrarPorTermino(term);
+    });
+
+     this.route.queryParams.subscribe(params => {
+      const term = params['q'] || '';
+      if (term) this.filtrarPorTermino(term);
+    });
   }
 
   listJuegos() {
     this.juegoService.getJuegos().subscribe({
       next: (juegos) => {
         this.juegos = juegos;
+        this.todosLosJuegos = juegos;
         console.log('Juegos obtenidos:', this.juegos);
       },
       error: (error) => {
@@ -55,6 +71,27 @@ export class ListJuegos {
         this.spinner = false;
       }
     });
+  }
+
+
+  filtrarPorTermino(term: string) {
+    const base = this.juegoFiltrosService.juegosActuales.length > 0
+    ? this.juegoFiltrosService.juegosActuales
+    : this.todosLosJuegos;
+
+    if (!term.trim()) {
+      this.juegos = base;
+      return;
+    }
+    this.juegos = base.filter((j: any) =>
+      j.titulo.toLowerCase().includes(term.toLowerCase())
+   );
+  }
+
+
+
+  eliminarJuego(arg0: number) {
+    throw new Error('Method not implemented.');
   }
 
   agregarAlCarrito(juegoId: number) {

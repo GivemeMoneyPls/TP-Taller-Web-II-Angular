@@ -22,12 +22,16 @@
     <!-- CONTENIDO -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <!-- BUSCADOR CENTRADO -->
-      <form class="d-flex mx-auto my-2 my-lg-0 w-50">
-        <input class="form-control me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar">
-        <button class="btn btn-outline-light" type="button">
+      <form class="d-flex mx-auto my-2 my-lg-0 w-50" (submit)="onSearchSubmit(); $event.preventDefault()">
+        <input class="form-control me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar"
+        [(ngModel)]="searchTerm"
+        name="search"
+        (input)="onSearchChange($event)">
+        <button class="btn btn-outline-light" type="button" (click)="onSearchSubmit()">
           <i class="bi bi-search"></i>
         </button>
       </form>
+
 
       <!-- MENÚ DERECHO -->
       <ul class="navbar-nav ms-auto align-items-center">
@@ -50,8 +54,9 @@
 
               <li><a class="dropdown-item" [routerLink]="['/mis-compras']" (click)="closeDropdown()">Mis Compras</a></li>
 
+              @if (currentUser.admin) {
               <li><a class="dropdown-item" [routerLink]="['/gestionar-juegos']" (click)="closeDropdown()">Gestionar juegos</a></li>
-
+              }
               <li><hr class="dropdown-divider"></li>
               <li>
                 <button (click)="logout()" class="dropdown-item" type="button">

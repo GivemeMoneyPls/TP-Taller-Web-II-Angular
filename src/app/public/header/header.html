@@ -50,8 +50,9 @@
 
               <li><a class="dropdown-item" [routerLink]="['/mis-compras']" (click)="closeDropdown()">Mis Compras</a></li>
 
+              @if (currentUser.admin) {
               <li><a class="dropdown-item" [routerLink]="['/gestionar-juegos']" (click)="closeDropdown()">Gestionar juegos</a></li>
-
+              }
               <li><hr class="dropdown-divider"></li>
               <li>
                 <button (click)="logout()" class="dropdown-item" type="button">

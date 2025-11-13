@@ -1,10 +1,11 @@
 export interface User {
     id:          number;
     email:       string;
-    contrase_a:  string; 
+    contrase_a:  string;
     nombre:      string;
     apellido:    string;
     direccion:   string;
+    admin:       boolean;
 }
 
 export interface SignupData {

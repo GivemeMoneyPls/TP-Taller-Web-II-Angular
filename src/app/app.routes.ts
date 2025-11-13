@@ -40,8 +40,7 @@ export const routes: Routes = [
 
     {
     path: 'juego/:id',
-    component: DetailJuegos,
-    canActivate: [publicGuard]
+    component: DetailJuegos
   },
 
    { path: 'mis-compras',

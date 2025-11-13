@@ -95,4 +95,9 @@ export class AuthService {
     
     return user ? user.id : null; 
   }
+  
+  public isAdmin(): boolean {
+    const user = this.getCurrentUser();
+    return user ? (user.admin === true) : false;
+  }
 }

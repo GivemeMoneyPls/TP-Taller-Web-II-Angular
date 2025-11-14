@@ -11,7 +11,7 @@
 
       @if (gestionar()) {
         <div class="col">
-          <button class="card create-card h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+          <button (click)="crearJuego()" class="card create-card h-100 w-100 d-flex flex-column justify-content-center align-items-center">
             <i class="bi bi-plus-lg create-icon"></i>
             <span class="mt-2">Crear juego</span>
           </button>

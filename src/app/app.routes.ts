@@ -12,6 +12,7 @@ import { ProfileComponent } from './modules/auth/pages/profile/profile';
 import { authGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
 import { publicGuard } from './core/guards/public.guard';
+import { CreateJuego } from './modules/juegos/pages/create-juego/create-juego';
 import { RecuperarConfirmarComponent } from './modules/auth/pages/recuperar-confirmar/recuperar-confirmar.component';
 import { RecuperarComponent } from './modules/auth/pages/recuperar/recuperar.component';
 
@@ -64,6 +65,11 @@ export const routes: Routes = [
   {
     path: 'actualizar-juegos/:id',
     component: UpdateJuegos,
+    canActivate: [adminGuard]
+  },
+  {
+    path: 'crear-juegos',
+    component: CreateJuego,
     canActivate: [adminGuard]
   },
   {

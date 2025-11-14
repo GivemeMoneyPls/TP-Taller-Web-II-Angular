@@ -37,7 +37,6 @@ export class ListJuegos {
   juegoFiltrosService = inject(JuegoFiltrosService);
   searchService = inject(SearchService);
 
-
   ngOnInit(): void {
     this.listJuegos();
 
@@ -121,6 +120,10 @@ export class ListJuegos {
 
   actualizarJuego(juegoId: number) {
     this.router.navigate(['/actualizar-juegos', juegoId]);
+  }
+
+  crearJuego() {
+    this.router.navigate(['/crear-juegos']);
   }
 
 }

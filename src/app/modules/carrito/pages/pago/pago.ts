@@ -35,6 +35,8 @@ export class Pago {
       this.router.navigate(['/carrito']);
       return;
     }
+
+    
   }
 
   finalizarCompra() {
@@ -76,7 +78,7 @@ export class Pago {
               next: () => {
                 localStorage.removeItem('carrito_total');
                 this.total = 0;
-                this.mensajeExito = `✅ Compra confirmada por ${usuario.nombre}. Total: ${totalPedido.toFixed(2)}.`;
+                this.mensajeExito = `Compra confirmada. Total: ${totalPedido.toFixed(2)}.`;
 
                 // Mostrar mensaje 3 segundos y redirigir
                 setTimeout(() => {

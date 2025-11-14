@@ -1,0 +1,6 @@
+@if (spinner) {
+  <app-spinner></app-spinner>
+}@else {
+<app-form-juego [juego]="juego" (eventEmitterFormJuego)="updateJuego($event)"></app-form-juego>
+}
+

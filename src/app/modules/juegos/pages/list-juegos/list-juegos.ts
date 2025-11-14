@@ -1,29 +1,42 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Juego } from '../../interfaces/juego.interface';
 import { JuegoService } from '../../../../api/services/juego/juego.service';
 import { CarritoService } from '../../../../api/services/carrito/carrito.service';
 import { GenerosPipe } from '../../pipes/generos-pipe';
 import { CurrencyPipe } from '@angular/common';
 import { JuegoFiltrosService } from '../../../../api/services/juego-filtros/juego-filtros.service';
+import { Spinner } from "../../../../shared/components/spinner/spinner";
+import { AuthService } from '../../../../api/services/auth/auth.service';
+import { SearchService } from '../../../../api/services/search/search.service';
 
 @Component({
   selector: 'app-list-juegos',
-  imports: [CommonModule, GenerosPipe, CurrencyPipe],
+  imports: [CommonModule, GenerosPipe, CurrencyPipe, Spinner],
   templateUrl: './list-juegos.html',
   styleUrl: './list-juegos.css',
 })
 export class ListJuegos {
 
+
+  spinner = true;
+
+  gestionar = input<Boolean>(false);
+
   juegos: Juego[] = [];
+  todosLosJuegos: Juego[] = []; //copia
   mensajeExito: string | null = null;
 
   juegoService = inject(JuegoService);
   carritoService = inject(CarritoService);
   router = inject(Router);
+  authService = inject(AuthService);
 
+  route = inject(ActivatedRoute);
   juegoFiltrosService = inject(JuegoFiltrosService);
+  searchService = inject(SearchService);
+
 
   ngOnInit(): void {
     this.listJuegos();
@@ -32,12 +45,22 @@ export class ListJuegos {
     this.juegoFiltrosService.juegos$.subscribe(juegos => {
       this.juegos = juegos;
     });
+
+    this.searchService.searchTerm$.subscribe(term => {
+      this.filtrarPorTermino(term);
+    });
+
+     this.route.queryParams.subscribe(params => {
+      const term = params['q'] || '';
+      if (term) this.filtrarPorTermino(term);
+    });
   }
 
   listJuegos() {
     this.juegoService.getJuegos().subscribe({
       next: (juegos) => {
         this.juegos = juegos;
+        this.todosLosJuegos = juegos;
         console.log('Juegos obtenidos:', this.juegos);
       },
       error: (error) => {
@@ -45,28 +68,59 @@ export class ListJuegos {
       },
       complete: () => {
         console.log('Solicitud de juegos completada.');
+        this.spinner = false;
       }
     });
   }
 
-  agregarAlCarrito(juegoId: number) {
-    const usuario = JSON.parse(localStorage.getItem('app_user') || '{}');
-    const usuarioId = usuario.id;
 
-    this.carritoService.agregarAlCarrito(juegoId, usuarioId).subscribe({
-      next: (response) => {
-        this.mensajeExito = response.message;
-        console.log('Juego agregado al carrito con éxito:', response);
-        setTimeout(() => this.mensajeExito = null, 3000);
-      },
-      error: (error) => {
-        console.error('Error al agregar al carrito:', error);
-      }
-    });
+  filtrarPorTermino(term: string) {
+    const base = this.juegoFiltrosService.juegosActuales.length > 0
+    ? this.juegoFiltrosService.juegosActuales
+    : this.todosLosJuegos;
+
+    if (!term.trim()) {
+      this.juegos = base;
+      return;
+    }
+    this.juegos = base.filter((j: any) =>
+      j.titulo.toLowerCase().includes(term.toLowerCase())
+   );
+  }
+
+
+
+  eliminarJuego(arg0: number) {
+    throw new Error('Method not implemented.');
+  }
+
+  agregarAlCarrito(juegoId: number) {
+    const usuario = this.authService.getCurrentUser();
+    if (usuario) {
+      const usuarioId = usuario.id;
+
+      this.carritoService.agregarAlCarrito(juegoId, usuarioId).subscribe({
+        next: (response) => {
+          this.mensajeExito = response.message;
+          console.log('Juego agregado al carrito con éxito:', response);
+          setTimeout(() => this.mensajeExito = null, 3000);
+        },
+        error: (error) => {
+          console.error('Error al agregar al carrito:', error);
+        }
+      });
+    } else {
+      console.error('Usuario no autenticado');
+      this.router.navigate(['/signin']);
+    }
   }
 
   verDetalle(juegoId: number) {
     this.router.navigate(['/juego', juegoId]);
+  }
+
+  actualizarJuego(juegoId: number) {
+    this.router.navigate(['/actualizar-juegos', juegoId]);
   }
 
 }

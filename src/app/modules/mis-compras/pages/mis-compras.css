@@ -1,0 +1,137 @@
+
+
+:host {
+    /* Fondo general */
+    display: block;
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #1b0044, #0a001f);
+    color: #eaeaea; 
+    padding: 3rem 0;
+}
+
+/* Contenedor principal centrado (tarjeta contenedora) */
+.container {
+    background-color: #151029; /* Fondo de la sección de compras */
+    border-radius: 1rem;
+    padding: 2rem; 
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    max-width: 900px; 
+    margin: auto; 
+}
+
+/* Título principal */
+h2.mb-4.text-center {
+    font-size: 2rem; 
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2rem !important;
+    text-shadow: 0 0 5px rgba(169, 142, 255, 0.5); 
+}
+
+/* Estilos para las alertas (Loading, Error, Empty) */
+.alert {
+    border-radius: 0.75rem;
+    font-weight: 600;
+    padding: 1rem;
+}
+.alert-info { 
+    background-color: #111135; 
+    color: #a98eff; 
+    border-color: #a98eff44; 
+}
+.alert-danger { 
+    background-color: #3b0000; 
+    color: #ff5757; 
+    border-color: #ff575744; 
+}
+
+
+/* --- ESTILOS DE LA TARJETA DE PEDIDO (CARD) --- */
+
+.card {
+    /* Fondo del pedido, un poco más claro que el fondo del contenedor */
+    background-color: #1f1a3a; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(139, 92, 246, 0.4); 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 0.75rem; 
+}
+
+.card:hover {
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 20px rgba(139, 92, 246, 0.6); 
+}
+
+/* Encabezado de la tarjeta (Pedido #...) */
+.card-header {
+    background-color: #3f3960 !important; 
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    color: #fff !important;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem; 
+    font-size: 1rem;
+    border-bottom: none;
+}
+
+/* Ítems individuales dentro del pedido (li) */
+.list-group-item {
+    background-color: transparent !important; 
+    color: #c5c0db; 
+    border-color: rgba(197, 192, 219, 0.1) !important; 
+    padding: 0.8rem 1.25rem; 
+    font-size: 0.95rem;
+}
+
+/* Miniaturas de los juegos */
+.img-thumbnail {
+    width: 50px !important; 
+    height: 50px !important; 
+    border: 2px solid #a98eff; 
+    border-radius: 0.5rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+
+.text-muted.small.me-3 {
+    color: #a98eff !important; 
+    font-weight: 500;
+    font-size: 0.85rem !important; 
+}
+
+/* Pie de página (Total Pagado) */
+.card-footer {
+    background-color: #2b254a !important; 
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    padding: 0.8rem 1.25rem; 
+    border-top: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.card-footer h4 {
+    color: #fff; 
+    font-weight: 700;
+    font-size: 1.2rem; 
+}
+
+.card-footer strong {
+    color: #69ff47; 
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .list-group-item {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .list-group-item .text-end {
+        width: 100%; 
+        margin-top: 0.5rem;
+        text-align: left !important; 
+    }
+}

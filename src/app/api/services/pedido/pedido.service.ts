@@ -2,41 +2,32 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
-
-
-export interface PedidoItem {
-  cantidad: number;
-  precio_unitario: number;
-  juego: {
-    id: number;
-    titulo: string;
-    imagen_url: string; 
-  };
-}
-
-export interface Pedido {
-  id: number;
-  usuario_id: number;
-  fecha: string;
-  total: number;
-  pedido_juego: PedidoItem[];
-}
+import { Pedido } from '../../../modules/mis-compras/interfaces/pedidos.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PedidoService { 
-
+export class PedidoService {
+ 
   private httpClient = inject(HttpClient);
-  
-private apiUrlBase = `${environment.API_URL_CARRITO}`;
 
- getMisPedidos(usuarioId: number): Observable<Pedido[]> {
-  
-   
-    const baseApiUrlSinCarrito = this.apiUrlBase.replace('/carrito', '');
-    
-   
-    return this.httpClient.get<Pedido[]>(`${baseApiUrlSinCarrito}/pedidos/usuario/${usuarioId}`);
-  }
+  private apiUrlBase = environment.API_URL_CARRITO.replace('/carrito', '');
+
+  /**
+   * Obtiene la lista de pedidos de un usuario específico.
+   * @param usuarioId El ID del usuario.
+   * @returns Un Observable con un array de Pedido.
+   */
+
+  getMisPedidos(usuarioId: number): Observable<Pedido[]> {
+    const url = `${this.apiUrlBase}/pedidos/usuario/${usuarioId}`;
+    return this.httpClient.get<Pedido[]>(url);
+  }
+
+  createPedido(usuarioId: number, juegos: { juegoId: number; cantidad: number }[]): Observable<Pedido> {
+  const url = `${this.apiUrlBase}/pedidos/finalizar`;
+  return this.httpClient.post<Pedido>(url, { usuarioId, juegos });
+ }
+
+
 }

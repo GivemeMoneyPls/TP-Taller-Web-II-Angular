@@ -4,7 +4,8 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './core/Interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withInMemoryScrolling({
-        scrollPositionRestoration: 'top', //  vuelve ARRIBA en cada navegación
+        scrollPositionRestoration: 'top',
       })
     ),
     provideAnimationsAsync(),
@@ -22,6 +23,6 @@ export const appConfig: ApplicationConfig = {
                 preset: Aura
             }
         }),
-        provideHttpClient(withFetch())
+        provideHttpClient(withFetch(), withInterceptors([authInterceptor]))
   ]
 };

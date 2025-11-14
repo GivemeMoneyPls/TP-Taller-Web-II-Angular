@@ -1,0 +1,147 @@
+/* Fondo general */
+.update-bg {
+  background: radial-gradient(circle at top left, #1b0044, #0a001f);
+  min-height: 100vh;
+  color: #e24c4c;
+}
+
+/* Card del formulario */
+.update-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+}
+
+/* Inputs */
+.form-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  border-radius: 0.4rem;
+}
+
+.form-input::placeholder {
+  color: #bbb;
+}
+
+.form-input:focus {
+  border: 1px solid #8b5cf6;
+  box-shadow: none;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Select: eliminar flecha y custom */
+.select-custom {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+/* Opciones del select */
+select option {
+  background: #1b0044;
+  color: white;
+}
+
+select option:hover {
+  background: #8b5cf6 !important;
+}
+
+/* Checkbox custom */
+.custom-check {
+  width: 1.1rem;
+  height: 1.1rem;
+  cursor: pointer;
+  accent-color: #8b5cf6;
+}
+
+.custom-check:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+}
+
+/* Botón actualizar */
+.btn-primary {
+  background-color: #8b5cf6;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #a78bfa;
+}
+
+
+.update-card {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.update-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+}
+
+.update-input:focus {
+  border: 1px solid #8b5cf6;
+  box-shadow: none;
+}
+
+.update-select {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: none;
+}
+
+.update-select option {
+  color: #000;
+}
+
+/* ✅ Contenedor horizontal */
+.genero-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* ✅ Chip del género */
+.genero-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ✅ Checkbox custom EXACTO al que pasaste */
+.genero-item input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  appearance: none;
+  border: 2px solid #bbb;
+  border-radius: 0.25rem;
+  background-color: #222;
+}
+
+.genero-item input[type="checkbox"]:checked {
+  background-color: #8b5cf6;
+  border-color: #8b5cf6;
+}
+
+.genero-item input[type="checkbox"]:hover {
+  border-color: #a78bfa;
+}
+
+.genero-item input[type="checkbox"]:focus {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+

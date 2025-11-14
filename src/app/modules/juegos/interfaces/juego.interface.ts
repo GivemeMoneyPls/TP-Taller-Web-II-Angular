@@ -26,3 +26,13 @@ export interface Plataforma {
     nombre: string;
 }
 
+export interface JuegoDTO {
+    id: number;
+    titulo: string;
+    fecha_lanzamiento: Date;
+    precio: number;
+    descripcion: string;
+    imagen_url: string | undefined;
+    plataforma_id: number;
+    generos: number[];
+}

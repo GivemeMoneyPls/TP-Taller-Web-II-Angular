@@ -1,0 +1,7 @@
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: .35rem;
+  color: #a78bfa !important;
+  filter: drop-shadow(0 0 6px rgba(167, 139, 250, 0.5));
+}

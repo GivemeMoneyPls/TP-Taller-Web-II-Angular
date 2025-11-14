@@ -12,4 +12,8 @@ export class JuegoFiltrosService {
   actualizarJuegos(juegos: Juego[]) {
     this.juegosSubject.next(juegos);
   }
+
+  get juegosActuales(): Juego[] {
+    return this.juegosSubject.value;
+  }
 }

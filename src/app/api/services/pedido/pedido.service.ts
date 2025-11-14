@@ -23,4 +23,11 @@ export class PedidoService {
     const url = `${this.apiUrlBase}/pedidos/usuario/${usuarioId}`;
     return this.httpClient.get<Pedido[]>(url);
   }
+
+  createPedido(usuarioId: number, juegos: { juegoId: number; cantidad: number }[]): Observable<Pedido> {
+  const url = `${this.apiUrlBase}/pedidos/finalizar`;
+  return this.httpClient.post<Pedido>(url, { usuarioId, juegos });
+ }
+
+
 }

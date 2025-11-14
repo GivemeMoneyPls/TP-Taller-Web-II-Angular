@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { Juego } from '../../interfaces/juego.interface';
 import { JuegoService } from '../../../../api/services/juego/juego.service';
+import { CarritoService } from '../../../../api/services/carrito/carrito.service';
+import { AuthService } from '../../../../api/services/auth/auth.service';
 
 @Component({
   selector: 'app-detail-juegos',
@@ -15,10 +17,13 @@ export class DetailJuegos implements OnInit {
   juegoService = inject(JuegoService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+  carritoService = inject(CarritoService);
+  authService = inject(AuthService);
 
   juego: Juego | null = null;
   juegosSimilares: Juego[] = [];
   loading = true;
+  mensajeExito: string | null = null;
 
   @ViewChild('carouselTrack', { static: false }) carouselTrack!: ElementRef<HTMLDivElement>;
 
@@ -64,4 +69,27 @@ export class DetailJuegos implements OnInit {
     if (this.carouselTrack)
       this.carouselTrack.nativeElement.scrollBy({ left: 300, behavior: 'smooth' });
   }
+
+
+  agregarAlCarrito(juegoId: number) {
+  const usuario = this.authService.getCurrentUser();
+
+  if (usuario) {
+    const usuarioId = usuario.id;
+
+    this.carritoService.agregarAlCarrito(juegoId, usuarioId).subscribe({
+      next: (response) => {
+        this.mensajeExito = response.message;
+        console.log('Juego agregado al carrito con éxito:', response);
+        setTimeout(() => this.mensajeExito = null, 3000);
+      },
+      error: (error) => {
+        console.error('Error al agregar al carrito:', error);
+      }
+    });
+  } else {
+    this.router.navigate(['/signin']);
+  }
+}
+
 }

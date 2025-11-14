@@ -13,7 +13,6 @@
 
         <form [formGroup]="form" (ngSubmit)="sendJuego()" enctype="multipart/form-data">
 
-          <!-- Título -->
           <div class="mb-3">
             <label class="form-label text-light fw-semibold">Título</label>
             <input
@@ -22,9 +21,11 @@
               formControlName="titulo"
               placeholder="Título del juego"
             />
+            @if (form.get('titulo')?.invalid && form.get('titulo')?.touched) {
+            <small class="text-danger">El titulo es obligatorio.</small>
+          }
           </div>
 
-          <!-- Fecha lanzamiento -->
           <div class="mb-3">
             <label class="form-label text-light fw-semibold">Fecha de lanzamiento</label>
             <input
@@ -32,9 +33,11 @@
               class="form-control form-input"
               formControlName="fecha_lanzamiento"
             />
+            @if (form.get('fecha_lanzamiento')?.invalid && form.get('fecha_lanzamiento')?.touched) {
+            <small class="text-danger">La fecha de lanzamiento es obligatoria.</small>
+          }
           </div>
 
-          <!-- Precio -->
           <div class="mb-3">
             <label class="form-label text-light fw-semibold">Precio (USD)</label>
             <input
@@ -45,9 +48,11 @@
               formControlName="precio"
               placeholder="0.00"
             />
+            @if (form.get('precio')?.invalid && form.get('precio')?.touched) {
+            <small class="text-danger">El precio es obligatorio.</small>
+          }
           </div>
 
-          <!-- Descripción -->
           <div class="mb-3">
             <label class="form-label text-light fw-semibold">Descripción</label>
             <textarea
@@ -56,9 +61,11 @@
               formControlName="descripcion"
               placeholder="Descripción del juego"
             ></textarea>
+            @if (form.get('descripcion')?.invalid && form.get('descripcion')?.touched) {
+            <small class="text-danger">La descripcion es obligatoria.</small>
+          }
           </div>
 
-          <!-- Imagen -->
           <div class="mb-3">
             <label class="form-label text-light fw-semibold">Carga la imagen</label>
             <input
@@ -74,7 +81,6 @@
 
           </div>
 
-          <!-- Plataforma -->
           <div class="mb-3">
             <label class="form-label text-light fw-semibold">Plataforma</label>
             <select
@@ -86,9 +92,11 @@
             }
 
             </select>
+            @if (form.get('plataforma_id')?.invalid && form.get('plataforma_id')?.touched) {
+            <small class="text-danger">La plataforma es obligatoria.</small>
+          }
           </div>
 
-          <!-- Géneros -->
           <div class="mb-4">
             <label class="form-label text-light fw-semibold">Géneros</label>
 
@@ -104,10 +112,12 @@
                   <span>{{ genero.nombre }}</span>
                 </label>
               }
+              @if (form.get('generos')?.invalid && form.get('generos')?.touched) {
+            <small class="text-danger">Al menos un genero es obligatorio.</small>
+          }
             </div>
           </div>
 
-          <!-- Botón -->
           <button [disabled]="form.invalid" class="btn btn-primary w-100 fw-semibold py-2">
             <i class="{{icono}} me-2"></i>
             {{title}}

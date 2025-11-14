@@ -40,26 +40,31 @@ export class ListJuegos {
   ngOnInit(): void {
     this.listJuegos();
 
-    // 🔁 Cuando cambian los filtros, se actualiza la lista automáticamente
-    this.juegoFiltrosService.juegos$.subscribe(juegos => {
-      this.juegos = juegos;
-    });
-
-    this.searchService.searchTerm$.subscribe(term => {
-      this.filtrarPorTermino(term);
-    });
+    this.filtrarJuegos();
 
      this.route.queryParams.subscribe(params => {
       const term = params['q'] || '';
-      if (term) this.filtrarPorTermino(term);
+      this.filtrarPorTermino(term);
     });
+  }
+
+  filtrarJuegos() {
+    this.juegoFiltrosService.juegos$.subscribe(juegos => {
+  if (juegos === null) {
+    if (this.todosLosJuegos && this.todosLosJuegos.length > 0) {
+      this.juegos = [...this.todosLosJuegos];
+    }
+    return;
+  }
+  this.juegos = juegos;
+});
   }
 
   listJuegos() {
     this.juegoService.getJuegos().subscribe({
       next: (juegos) => {
         this.juegos = juegos;
-        this.todosLosJuegos = juegos;
+        this.todosLosJuegos = [...juegos];
         console.log('Juegos obtenidos:', this.juegos);
       },
       error: (error) => {
@@ -73,19 +78,25 @@ export class ListJuegos {
   }
 
 
-  filtrarPorTermino(term: string) {
-    const base = this.juegoFiltrosService.juegosActuales.length > 0
+filtrarPorTermino(term: string) {
+
+  if (!term.trim()) {
+    if (this.juegoFiltrosService.juegosActuales.length > 0) {
+      this.juegos = [...this.juegoFiltrosService.juegosActuales];
+    } else {
+      this.juegos = [...this.todosLosJuegos];
+    }
+    return;
+  }
+  const base = this.juegoFiltrosService.juegosActuales.length > 0
     ? this.juegoFiltrosService.juegosActuales
     : this.todosLosJuegos;
 
-    if (!term.trim()) {
-      this.juegos = base;
-      return;
-    }
-    this.juegos = base.filter((j: any) =>
-      j.titulo.toLowerCase().includes(term.toLowerCase())
-   );
-  }
+  this.juegos = base.filter(j =>
+    j.titulo.toLowerCase().includes(term.toLowerCase())
+  );
+}
+
 
 
   agregarAlCarrito(juegoId: number) {
@@ -127,12 +138,10 @@ export class ListJuegos {
 
   this.juegoService.deleteJuego(id).subscribe({
     next: (res: any) => {
-      // Procesar datos recibidos
       this.mensajeExito = res.message;
     },
     error: (err) => console.error("Error al eliminar:", err),
     complete: () => {
-      // Se ejecuta SIEMPRE, haya body o no
       this.listJuegos();
       setTimeout(() => this.mensajeExito = null, 3000);
     }

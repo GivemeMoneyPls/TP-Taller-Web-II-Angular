@@ -1,60 +1,83 @@
 @if (mensajeExito) {
-<div class="alert alert-success alert-fixed">
-  {{ mensajeExito }}
-</div>
+  <div class="alert alert-success alert-fixed">
+    {{ mensajeExito }}
+  </div>
 }
-<div *ngIf="!loading && juego" class="container py-5 text-light">
+
+@if (!loading && juego) {
+<div class="container py-5 text-light">
+
   <div class="row align-items-center">
     <div class="col-md-5 text-center mb-4 mb-md-0">
-      <img [src]="'http://localhost:3000' + juego.imagen_url" class="img-fluid rounded shadow" [alt]="juego.titulo" />
+      <img [src]="'http://localhost:3000' + juego.imagen_url"
+           class="img-fluid rounded shadow"
+           [alt]="juego.titulo" />
     </div>
+
     <div class="col-md-7">
       <h2 class="fw-bold mb-3">{{ juego.titulo }}</h2>
+
       <p class="text-secondary mb-1">
         Plataforma: <strong>{{ juego.plataforma.nombre }}</strong>
       </p>
+
       <p class="text-secondary mb-1">
         Géneros:
-        <span *ngFor="let g of juego.juego_genero; let last = last">
-          {{ g.genero.nombre }}<span *ngIf="!last">, </span>
-        </span>
+        @for (g of juego.juego_genero; track g.genero_id; let last = $last) {
+          {{ g.genero.nombre }}
+        }
       </p>
+
       <p class="text-secondary mb-1">
-         Lanzamiento: <strong>{{ juego.fecha_lanzamiento | date:'dd/MM/yyyy' }}</strong>
+        Lanzamiento:
+        <strong>{{ juego.fecha_lanzamiento | date:'dd/MM/yyyy' }}</strong>
       </p>
+
       <p class="mt-3">{{ juego.descripcion }}</p>
+
       <h4 class="text-primary fw-bold mt-4">{{ juego.precio | currency }}</h4>
+
       <button class="btn btn-outline-light mt-3" (click)="agregarAlCarrito(juego.id)">
         <i class="bi bi-cart-plus me-2"></i> Añadir al carrito
       </button>
     </div>
   </div>
 
+  @if (juegosSimilares.length) {
+  <div class="mt-5">
+    <h4 class="text-light mb-3">Juegos con géneros similares</h4>
 
-  <div *ngIf="juegosSimilares.length" class="mt-5">
-  <h4 class="text-light mb-3">Juegos con generos similares</h4>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" (click)="scrollLeft()">&#10094;</button>
 
-  <div class="carousel-container">
-    <button class="carousel-btn prev" (click)="scrollLeft()">&#10094;</button>
+      <div class="carousel-track" #carouselTrack>
+        @for (js of juegosSimilares; track js.id) {
+          <div
+            class="card-similar bg-dark rounded shadow-sm p-3 text-center"
+            (click)="verDetalle(js.id)"
+            style="cursor: pointer;"
+          >
+            <img
+              [src]="'http://localhost:3000' + js.imagen_url"
+              class="img-similar mb-2"
+              [alt]="js.titulo"
+            />
 
-    <div class="carousel-track" #carouselTrack>
-      <div
-        class="card-similar bg-dark rounded shadow-sm p-3 text-center"
-        *ngFor="let js of juegosSimilares"
-        (click)="verDetalle(js.id)"
-        style="cursor: pointer;"
-      >
-        <img [src]="'http://localhost:3000' + js.imagen_url" class="img-similar mb-2" [alt]="js.titulo" />
-        <h6 class="fw-bold text-light mb-1">{{ js.titulo }}</h6>
-        <p class="text-secondary small">
-          <span *ngFor="let g of js.juego_genero; let last = last">
-            {{ g.genero.nombre }}<span *ngIf="!last">, </span>
-          </span>
-        </p>
+            <h6 class="fw-bold text-light mb-1">{{ js.titulo }}</h6>
+
+            <p class="text-secondary small">
+              @for (g of js.juego_genero; track g.genero_id; let last = $last) {
+                {{ g.genero.nombre }}
+              }
+            </p>
+          </div>
+        }
       </div>
-    </div>
 
-    <button class="carousel-btn next" (click)="scrollRight()">&#10095;</button>
+      <button class="carousel-btn next" (click)="scrollRight()">&#10095;</button>
+    </div>
   </div>
+  }
+
 </div>
-</div>
+}

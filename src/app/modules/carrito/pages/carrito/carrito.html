@@ -10,12 +10,12 @@
     <div class="carrito-lista">
       @for (juego of juegos; track juego.juego.id) {
         <div class="game-card shadow-sm">
-          <!-- Cantidad -->
+          
           <span class="cantidad-badge" *ngIf="juego.cantidad > 1">
             ×{{ juego.cantidad }}
           </span>
 
-          <!-- Imagen -->
+          
           <div class="game-img-wrapper">
             <img
               [src]="'http://localhost:3000' + juego.juego.imagen_url"
@@ -24,22 +24,19 @@
             />
           </div>
 
-          <!-- Información -->
           <div class="card-body text-light">
             <h5 class="fw-bold mb-1">{{ juego.juego.titulo }}</h5>
             <p class="text-secondary small mb-2">
               {{ juego.juego.plataforma.nombre }} •
               {{ juego.juego.juego_genero | generosPipe }}
             </p>
-            <!-- Botón estilo enlace -->
+           
           <button class="btn-link-eliminar" (click)="eliminarDelCarrito(juego)">
             <i class="bi bi-trash"></i> Eliminar
           </button>
 
           </div>
 
-
-          <!-- Precio + Subtotal -->
             <div class="precio">
             <p class="fw-semibold text-primary fs-5 mb-1">
                 Precio: {{ juego.juego.precio | currency }}

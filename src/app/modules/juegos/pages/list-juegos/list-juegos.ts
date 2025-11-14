@@ -88,11 +88,6 @@ export class ListJuegos {
   }
 
 
-
-  eliminarJuego(arg0: number) {
-    throw new Error('Method not implemented.');
-  }
-
   agregarAlCarrito(juegoId: number) {
     const usuario = this.authService.getCurrentUser();
     if (usuario) {
@@ -125,5 +120,21 @@ export class ListJuegos {
   crearJuego() {
     this.router.navigate(['/crear-juegos']);
   }
+
+
+  eliminarJuego(id: number) {
+  if (!confirm("¿Deseas eliminar este juego?")) return;
+
+  this.juegoService.deleteJuego(id).subscribe({
+    next: (res: any) => {
+      this.mensajeExito = res.message || "Juego eliminado correctamente";
+      this.listJuegos();
+      setTimeout(() => this.mensajeExito = null, 3000);
+    },
+    error: (err) => {
+      console.error("Error al eliminar:", err);
+    }
+  });
+}
 
 }

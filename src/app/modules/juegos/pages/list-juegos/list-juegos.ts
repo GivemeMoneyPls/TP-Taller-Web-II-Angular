@@ -37,7 +37,6 @@ export class ListJuegos {
   juegoFiltrosService = inject(JuegoFiltrosService);
   searchService = inject(SearchService);
 
-
   ngOnInit(): void {
     this.listJuegos();
 

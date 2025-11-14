@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../api/services/auth/auth.service';
 import { SearchService } from '../../api/services/search/search.service';
+import { JuegoFiltrosService } from '../../api/services/juego-filtros/juego-filtros.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ import { SearchService } from '../../api/services/search/search.service';
 })
 export class Header implements OnInit{
   authService = inject(AuthService);
+  juegoFiltrosService = inject(JuegoFiltrosService);
   user$ = this.authService.user$;
   searchService = inject(SearchService);
   router = inject(Router);
@@ -44,7 +46,9 @@ export class Header implements OnInit{
 
   logout() {
     localStorage.removeItem('juegoFiltrosGuardados');
+    this.juegoFiltrosService.actualizarJuegos([]);
     this.searchService.setSearchTerm('');
+    console.log("final")
     this.closeDropdown();
     this.authService.logout();
   }

@@ -99,11 +99,6 @@ filtrarPorTermino(term: string) {
 
 
 
-
-  eliminarJuego(arg0: number) {
-    throw new Error('Method not implemented.');
-  }
-
   agregarAlCarrito(juegoId: number) {
     const usuario = this.authService.getCurrentUser();
     if (usuario) {
@@ -136,5 +131,23 @@ filtrarPorTermino(term: string) {
   crearJuego() {
     this.router.navigate(['/crear-juegos']);
   }
+
+
+  eliminarJuego(id: number) {
+  if (!confirm("¿Deseas eliminar este juego?")) return;
+
+  this.juegoService.deleteJuego(id).subscribe({
+    next: (res: any) => {
+      // Procesar datos recibidos
+      this.mensajeExito = res.message;
+    },
+    error: (err) => console.error("Error al eliminar:", err),
+    complete: () => {
+      // Se ejecuta SIEMPRE, haya body o no
+      this.listJuegos();
+      setTimeout(() => this.mensajeExito = null, 3000);
+    }
+  });
+}
 
 }

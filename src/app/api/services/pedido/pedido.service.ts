@@ -13,12 +13,6 @@ export class PedidoService {
 
   private apiUrlBase = environment.API_URL_CARRITO.replace('/carrito', '');
 
-  /**
-   * Obtiene la lista de pedidos de un usuario específico.
-   * @param usuarioId El ID del usuario.
-   * @returns Un Observable con un array de Pedido.
-   */
-
   getMisPedidos(usuarioId: number): Observable<Pedido[]> {
     const url = `${this.apiUrlBase}/pedidos/usuario/${usuarioId}`;
     return this.httpClient.get<Pedido[]>(url);
@@ -28,6 +22,4 @@ export class PedidoService {
   const url = `${this.apiUrlBase}/pedidos/finalizar`;
   return this.httpClient.post<Pedido>(url, { usuarioId, juegos });
  }
-
-
 }

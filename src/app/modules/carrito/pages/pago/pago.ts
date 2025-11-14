@@ -49,7 +49,7 @@ export class Pago {
       return;
     }
 
-    //Traemos los juegos del carrito
+    
     this.carritoService.getCarrito(usuario.id).subscribe({
       next: (carritoItems: { juego: { id: number }; cantidad: number }[]) => {
         if (!carritoItems || carritoItems.length === 0) {
@@ -57,30 +57,27 @@ export class Pago {
           return;
         }
 
-        // Mapear al formato que espera el backend
+       
         const juegos = carritoItems.map(item => ({
           juegoId: item.juego.id,
           cantidad: item.cantidad
         }));
 
-        //Crear pedido en backend
+      
         this.pedidoService.createPedido(usuario.id, juegos).subscribe({
           next: (nuevoPedido: { total: number | string }) => {
             console.log('Pedido creado:', nuevoPedido);
 
-            // Convertimos total a número por si viene como string
             const totalPedido = typeof nuevoPedido.total === 'number'
               ? nuevoPedido.total
               : parseFloat(nuevoPedido.total as string);
 
-            //  Vaciar carrito
             this.carritoService.vaciarCarrito(usuario.id).subscribe({
               next: () => {
                 localStorage.removeItem('carrito_total');
                 this.total = 0;
-                this.mensajeExito = `Compra confirmada. Total: ${totalPedido.toFixed(2)}.`;
+                this.mensajeExito = `Compra confirmada. Total: $${totalPedido.toFixed(2)}.`;
 
-                // Mostrar mensaje 3 segundos y redirigir
                 setTimeout(() => {
                   this.mensajeExito = null;
                   this.router.navigate(['/mis-compras']);

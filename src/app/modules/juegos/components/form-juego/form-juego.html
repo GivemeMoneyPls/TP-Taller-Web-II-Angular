@@ -1,9 +1,15 @@
+@if (mensajeFallo) {
+<div class="alert alert-danger alert-fixed">
+  {{ mensajeFallo }}
+</div>
+}
+
 <div class="container-fluid py-4 update-bg">
   <div class="row justify-content-center">
     <div class="col-12 col-md-8">
 
       <div class="card update-card p-4">
-        <h3 class="fw-bold text-light mb-4">Actualizar Juego</h3>
+        <h3 class="fw-bold text-light mb-4">{{title}}</h3>
 
         <form [formGroup]="form" (ngSubmit)="sendJuego()" enctype="multipart/form-data">
 
@@ -102,9 +108,9 @@
           </div>
 
           <!-- Botón -->
-          <button class="btn btn-primary w-100 fw-semibold py-2">
-            <i class="bi bi-pencil-square me-2"></i>
-            Actualizar Juego
+          <button [disabled]="form.invalid" class="btn btn-primary w-100 fw-semibold py-2">
+            <i class="{{icono}} me-2"></i>
+            {{title}}
           </button>
 
         </form>

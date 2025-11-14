@@ -15,13 +15,17 @@ import { firstValueFrom } from 'rxjs';
 })
 export class FormJuego {
 
+    title: string = "Crear juego";
+
+    icono: string = "bi bi-plus-lg";
+
     private fb = inject(FormBuilder);
 
     form!:FormGroup;
 
     juegoObtenido!:Juego;
 
-    id:number = 0;
+    id:number | undefined;
 
     juegoService = inject(JuegoService);
 
@@ -44,7 +48,14 @@ export class FormJuego {
 
     imagenUrlFinal: string | undefined;
 
+    mensajeFallo: string | null = null;
+
     ngOnInit(){
+      if (this.juego()) {
+        this.title = "Actualizar juego";
+        this.icono = "bi bi-pencil-square";
+      }
+
       console.log('Juego recibido en el formulario:', this.juego());
       this.id = Number(this.activatedRouter.snapshot.paramMap.get('id'));
 
@@ -132,10 +143,15 @@ async sendJuego() {
       console.log('Imagen subida correctamente:', this.imagenUrlFinal);
     } catch (error) {
       console.error('Error al subir imagen:', error);
-      return; // no seguimos si falla la subida
+      return;
     }
-
   }
+
+    if (!this.juego() && !this.imagenUrlFinal) {
+      this.mensajeFallo = "La imagen es obligatoria al crear un nuevo juego.";
+      setTimeout(() => this.mensajeFallo = null, 3000);
+        return;
+      }
 
       const juegoAEnviar: JuegoDTO = {
       id: this.id,

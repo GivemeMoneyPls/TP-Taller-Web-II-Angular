@@ -123,4 +123,8 @@ export class ListJuegos {
     this.router.navigate(['/actualizar-juegos', juegoId]);
   }
 
+  crearJuego() {
+    this.router.navigate(['/crear-juegos']);
+  }
+
 }

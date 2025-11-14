@@ -1,0 +1,99 @@
+:host {
+  display: block;
+  background: radial-gradient(circle at top left, #1b0044, #0a001f);
+  min-height: calc(100vh - 160px);
+  padding: 3rem 1rem;
+  color: #fff;
+}
+
+.recuperar-wrapper {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.form-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  padding: 2.5rem;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+/* Inputs */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #bbb;
+  font-weight: 500;
+}
+
+.form-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  color: #fff;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: #8b5cf6;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Botón */
+.submit-btn {
+  background-color: #8b5cf6;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0.75rem;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: #a78bfa;
+}
+
+/* Mensajes */
+.alert-success {
+  background: rgba(0, 255, 127, 0.15);
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  color: #00ff7f;
+}
+
+.alert-error {
+  background: rgba(255, 60, 60, 0.15);
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  color: #ff6b6b;
+}
+
+.form-link {
+  color: #a78bfa;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.form-link:hover {
+  color: white;
+  text-decoration: underline;
+}

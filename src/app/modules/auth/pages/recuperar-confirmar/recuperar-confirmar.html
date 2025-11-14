@@ -1,0 +1,26 @@
+<!-- src/app/modules/auth/pages/recuperar-confirmar/recuperar-confirmar.component.html -->
+<div class="recuperar-confirmar-container">
+  <div class="recuperar-confirmar-box">
+    <h2>Restablecer Contraseña</h2>
+
+    <!-- Input nueva contraseña -->
+    <input
+      type="password"
+      placeholder="Nueva contraseña"
+      [(ngModel)]="nuevaContrasena"
+    />
+
+    <!-- Input confirmar contraseña -->
+    <input
+      type="password"
+      placeholder="Confirmar contraseña"
+      [(ngModel)]="confirmarContrasena"
+    />
+
+    <!-- Botón para confirmar -->
+    <button (click)="confirmarContrasenaFunc()">Confirmar</button>
+
+    <!-- Mensaje de error o éxito -->
+    <div class="mensaje" *ngIf="mensaje">{{ mensaje }}</div>
+  </div>
+</div>

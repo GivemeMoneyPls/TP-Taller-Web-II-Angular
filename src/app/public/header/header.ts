@@ -46,7 +46,7 @@ export class Header implements OnInit{
 
   logout() {
     localStorage.removeItem('juegoFiltrosGuardados');
-    this.juegoFiltrosService.actualizarJuegos([]);
+    this.juegoFiltrosService.limpiarFiltros();
     this.searchService.setSearchTerm('');
     console.log("final")
     this.closeDropdown();
@@ -54,22 +54,43 @@ export class Header implements OnInit{
   }
 
 
+
   onSearchChange(event: Event) {
-    const value = (event.target as HTMLInputElement).value;
-    this.searchTerm = value;
+  const value = (event.target as HTMLInputElement).value;
+  this.searchTerm = value;
 
-    this.searchService.setSearchTerm(value);
-
-    if (!this.router.url.includes('/juegos') && value.trim() !== '') {
-      this.router.navigate(['/juegos'], { queryParams: { q: value } });
-    }
+  if (value.trim() === '') {
+    this.router.navigate([], {
+      queryParams: { q: null },
+      queryParamsHandling: 'merge'
+    });
+    return;
   }
+
+  if (!this.router.url.includes('/juegos') && !this.router.url.includes('/gestionar-juegos')) {
+    this.router.navigate(['/juegos'], { queryParams: { q: value } });
+  } else {
+
+    this.router.navigate([], {
+      queryParams: { q: value },
+      queryParamsHandling: 'merge'
+    });
+  }
+}
 
   onSearchSubmit() {
-    if (this.router.url.includes('/juegos')) {
-      this.searchService.setSearchTerm(this.searchTerm);
-    } else {
-      this.router.navigate(['/juegos'], { queryParams: { q: this.searchTerm } });
-    }
+  const url = this.router.url;
+
+  if (url.includes('/juegos') || url.includes('/gestionar-juegos')) {
+    this.searchService.setSearchTerm(this.searchTerm);
+
+    this.router.navigate([], {
+      relativeTo: this.router.routerState.root,
+      queryParams: { q: this.searchTerm },
+      queryParamsHandling: 'merge'
+    });
+  } else {
+    this.router.navigate(['/juegos'], { queryParams: { q: this.searchTerm } });
   }
+}
 }

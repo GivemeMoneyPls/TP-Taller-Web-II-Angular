@@ -27,7 +27,11 @@ export class JuegoService {
 }
 
   updateJuego(juego:JuegoDTO){
-     return this.httpClient.put<Juego[]>(`${environment.API_URL_GAME}${juego.id}`, juego);
+     return this.httpClient.put<Juego>(`${environment.API_URL_GAME}${juego.id}`, juego);
+  }
+
+  createJuego(juego:JuegoDTO): Observable<Juego>{
+     return this.httpClient.post<Juego>(`${environment.API_URL_GAME}`, juego);
   }
 
 }

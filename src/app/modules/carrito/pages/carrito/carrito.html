@@ -1,8 +1,9 @@
 <div class="carrito-page">
-  <div *ngIf="mensaje" class="alert alert-success alert-fixed">
+  @if (mensaje) {
+  <div class="alert alert-success alert-fixed">
     {{ mensaje }}
   </div>
-
+}
   <div class="container py-4">
     <h2 class="text-light mb-4 text-center">🛒 Tu carrito</h2>
 
@@ -58,10 +59,12 @@
       }
     </div>
     <br>
+    @if (total > 0) {
     <div class="total-carrito">
-    <span>Totala pagar: </span>
-    <strong>{{ total | currency }}</strong>
+      <span>Total a pagar: </span>
+      <strong>{{ total | currency }}</strong>
     </div>
+    }
     <div class="finalizar-wrapper">
     <button
         class="btn btn-finalizar btn-lg px-5"

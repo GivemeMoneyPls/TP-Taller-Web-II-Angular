@@ -127,12 +127,14 @@ export class ListJuegos {
 
   this.juegoService.deleteJuego(id).subscribe({
     next: (res: any) => {
-      this.mensajeExito = res.message || "Juego eliminado correctamente";
+      // Procesar datos recibidos
+      this.mensajeExito = res.message;
+    },
+    error: (err) => console.error("Error al eliminar:", err),
+    complete: () => {
+      // Se ejecuta SIEMPRE, haya body o no
       this.listJuegos();
       setTimeout(() => this.mensajeExito = null, 3000);
-    },
-    error: (err) => {
-      console.error("Error al eliminar:", err);
     }
   });
 }

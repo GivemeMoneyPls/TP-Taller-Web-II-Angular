@@ -27,7 +27,7 @@ export interface Plataforma {
 }
 
 export interface JuegoDTO {
-    id: number;
+    id: number | undefined;
     titulo: string;
     fecha_lanzamiento: Date;
     precio: number;

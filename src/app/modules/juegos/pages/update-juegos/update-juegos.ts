@@ -51,11 +51,12 @@ export class UpdateJuegos {
             console.log('Juego actualizado:', juegoActualizado);
         },
         error: (error) => {
-            console.error('Error al actualizar el juego:', error);
+            this.router.navigate(['/gestionar-juegos'],
+          { queryParams: { mensaje: error } });
         },
         complete: () => {
-          console.log('Actualización de juego completada');
-          this.router.navigate(['/gestionar-juegos']);
+          this.router.navigate(['/gestionar-juegos'],
+        { queryParams: { mensajeExito: 'Juego actualizado correctamente' } });
         }
       });
     }

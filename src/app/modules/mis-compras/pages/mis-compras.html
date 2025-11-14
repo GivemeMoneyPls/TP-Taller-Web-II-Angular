@@ -1,41 +1,71 @@
 <div class="container my-5">
   <h2 class="mb-4 text-center">🛒 Mis Compras</h2>
 
-  <div *ngIf="isLoading" class="alert alert-warning text-center">Cargando tus compras...</div>
-  <div *ngIf="error" class="alert alert-danger text-center">{{ error }}</div>
-  <div *ngIf="!isLoading && misPedidos.length === 0 && !error" class="alert alert-info text-center">Aún no has realizado ninguna compra.</div>
+  @if (isLoading) {
+    <div class="alert alert-warning text-center">Cargando tus compras...</div>
+  }
 
-  <div *ngIf="misPedidos.length > 0">
-    <div *ngFor="let pedido of misPedidos" class="card shadow-sm mb-5">
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-        <div>
+  @if (error) {
+    <div class="alert alert-danger text-center">{{ error }}</div>
+  }
+
+  @if (!isLoading && misPedidos.length === 0 && !error) {
+    <div class="alert alert-info text-center">Aún no has realizado ninguna compra.</div>
+  }
+
+  @if (misPedidos.length > 0) {
+    @for (pedido of misPedidos; track pedido.id) {
+
+      <div class="card shadow-sm mb-5">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+          <div>
             <strong>Pedido #{{ pedido.id }}</strong>
-            
+          </div>
+          <small>Fecha: {{ pedido.fecha | date: 'dd/MM/yyyy' }}</small>
         </div>
-        <small>Fecha: {{ pedido.fecha | date: 'dd/MM/yyyy' }}</small>
-    </div>
-    <div class="card-body p-0">
-        
-        <ul class="list-group list-group-flush">
-           
-            <li *ngFor="let item of pedido.pedido_juego" class="list-group-item d-flex align-items-center justify-content-between">
+
+        <div class="card-body p-0">
+
+          <ul class="list-group list-group-flush">
+
+            @for (item of pedido.pedido_juego; track item.juego.id) {
+
+              <li class="list-group-item d-flex align-items-center justify-content-between">
+                
                 <div class="d-flex align-items-center">
-                  <img [src]="'http://localhost:3000' + item.juego.imagen_url" 
-     alt="{{ item.juego.titulo }}" 
-     class="img-thumbnail me-3" 
-     style="width: 60px; height: 60px; object-fit: cover;">
-                    <span>{{ item.juego.titulo }}</span>
+                  <img 
+                    [src]="'http://localhost:3000' + item.juego.imagen_url"
+                    alt="{{ item.juego.titulo }}"
+                    class="img-thumbnail me-3"
+                    style="width: 60px; height: 60px; object-fit: cover;"
+                  >
+                  <span>{{ item.juego.titulo }}</span>
                 </div>
+
                 <div class="text-end">
-                    <span class="text-muted small me-3">{{ item.cantidad }} unidad(es)</span>
-                    <strong>{{ item.precio_unitario | currency }} x {{ item.cantidad }} = {{ item.precio_unitario * item.cantidad | currency }}</strong>
+                  <span class="text-muted small me-3">{{ item.cantidad }} unidad(es)</span>
+                  <strong>
+                    {{ item.precio_unitario | currency }} 
+                    x 
+                    {{ item.cantidad }} 
+                    = 
+                    {{ item.precio_unitario * item.cantidad | currency }}
+                  </strong>
                 </div>
-            </li>
-        </ul>
-    </div>
-    <div class="card-footer text-end bg-light">
-        <h4>Total Pagado: <strong>{{ pedido.total | currency }}</strong></h4>
-    </div>
-</div>
-    </div>
+
+              </li>
+
+            }
+
+          </ul>
+        </div>
+
+        <div class="card-footer text-end bg-light">
+          <h4>Total Pagado: <strong>{{ pedido.total | currency }}</strong></h4>
+        </div>
+
+      </div>
+
+    }
+  }
 </div>

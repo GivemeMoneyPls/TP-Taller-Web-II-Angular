@@ -1,49 +1,48 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../../../../api/services/auth/auth.service'; 
+import { NotificationService } from '../../../../api/services/notification/notification.service';
 
 @Component({
   selector: 'app-recuperar',
   standalone: true,
   templateUrl: './recuperar.html',
   styleUrls: ['./recuperar.css'],
-  imports: [FormsModule, CommonModule, HttpClientModule]
+  imports: [FormsModule, CommonModule, RouterModule]
 })
 export class RecuperarComponent {
 
-  correo: string = '';
-  mensajeExito: string | null = null;
-  mensajeError: string | null = null;
+  authService = inject(AuthService);
+  notificationService = inject(NotificationService);
+  router = inject(Router);
 
-  constructor(private router: Router, private http: HttpClient) {}
+  correo: string = '';
+  cargando: boolean = false;
 
   enviarCorreo() {
-    this.mensajeError = null;
-    this.mensajeExito = null;
-
     if (!this.correo) {
-      this.mensajeError = "Debes ingresar un correo.";
+      this.notificationService.show('error', 'Debes ingresar un correo electrónico.');
       return;
     }
 
-    this.http.post('http://localhost:3000/api/auth/recuperar', { email: this.correo })
-      .subscribe({
-        next: (resp: any) => {
-          this.mensajeExito = resp.mensaje || "Correo enviado correctamente.";
+    this.cargando = true;
 
-          // Tomamos el token del backend
-          const token = resp.token;
+    this.authService.requestPasswordRecovery(this.correo).subscribe({
+      next: () => {
+        this.cargando = false;
+        this.notificationService.show('success', 'Token generado. Buscá el archivo "recuperar.txt" en la carpeta del servidor.');
 
-          setTimeout(() => {
-            // Redirigimos a recuperar-confirmar pasando el token por query params
-            this.router.navigate(['/recuperar-confirmar'], { queryParams: { token } });
-          }, 2000);
-        },
-        error: (err) => {
-          this.mensajeError = err.error?.mensaje || "Ocurrió un error. Intentá nuevamente.";
-        }
-      });
+        setTimeout(() => {
+           this.router.navigate(['/recuperar-confirmar']);
+        }, 3000);
+      },
+      error: (err) => {
+        this.cargando = false;
+        const msg = err.error?.mensaje || 'Error al solicitar recuperación.';
+        this.notificationService.show('error', msg);
+      }
+    });
   }
 }

@@ -1,99 +1,98 @@
-:host {
-  display: block;
-  background: radial-gradient(circle at top left, #1b0044, #0a001f);
-  min-height: calc(100vh - 160px);
-  padding: 3rem 1rem;
-  color: #fff;
-}
-
+/* WRAPPER PRINCIPAL */
 .recuperar-wrapper {
-  max-width: 450px;
-  margin: 0 auto;
+  /* Ajustamos la altura para que se vea el footer (igual que en signup) */
+  min-height: calc(100vh - 160px); 
+  width: 100%;
+  display: flex;
+  align-items: center; /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  padding: 2rem 1rem;
+  /* Fondo espacial consistente */
+  background: linear-gradient(135deg, #13002b 0%, #240046 100%);
 }
 
+/* TARJETA */
 .form-card {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 1rem;
-  backdrop-filter: blur(8px);
+  background-color: #1e1e2f;
   padding: 2.5rem;
+  border-radius: 15px;
+  border: 1px solid #3f3f5f;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 450px; 
+  color: white;
 }
 
+/* TÍTULO */
 .form-title {
   text-align: center;
   margin-bottom: 2rem;
   font-weight: bold;
+  color: #a78bfa;
+  font-size: 1.8rem;
 }
 
-/* Inputs */
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
+/* LABELS */
+.form-label {
+  color: #ccc;
+  font-size: 0.9rem;
   margin-bottom: 0.5rem;
-  color: #bbb;
-  font-weight: 500;
+  display: block;
 }
 
-.form-input {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid transparent;
-  color: #fff;
-  width: 100%;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  transition: 0.2s ease;
-}
-
-.form-input:focus {
-  border-color: #8b5cf6;
-  outline: none;
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-/* Botón */
-.submit-btn {
-  background-color: #8b5cf6;
-  border: none;
+/* INPUTS */
+.custom-input {
+  background-color: #2d2d44;
+  border: 1px solid #4b4b6b;
   color: white;
-  font-weight: bold;
-  font-size: 1.1rem;
-  padding: 0.75rem;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
   width: 100%;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-.submit-btn:hover {
-  background-color: #a78bfa;
+/* --- SOLUCIÓN AL PLACEHOLDER --- */
+.custom-input::placeholder {
+  color: #888; /* Gris claro para que sea visible */
+  opacity: 1;  /* Firefox baja la opacidad por defecto */
 }
 
-/* Mensajes */
-.alert-success {
-  background: rgba(0, 255, 127, 0.15);
+.custom-input:focus {
+  background-color: #2d2d44;
+  border-color: #7c3aed;
+  color: white;
+  box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.25);
+  outline: none;
+}
+
+/* BOTÓN */
+.btn-primary {
+  background-color: #7c3aed;
+  border: none;
   padding: 0.8rem;
+  font-weight: bold;
   border-radius: 8px;
-  margin-bottom: 1rem;
-  color: #00ff7f;
+  width: 100%;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s;
 }
 
-.alert-error {
-  background: rgba(255, 60, 60, 0.15);
-  padding: 0.8rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  color: #ff6b6b;
+.btn-primary:hover {
+  background-color: #6d28d9;
 }
 
-.form-link {
+.btn-primary:disabled {
+  background-color: #4b4b6b;
+  cursor: not-allowed;
+}
+
+/* LINKS */
+a {
   color: #a78bfa;
   text-decoration: none;
-  font-weight: 500;
+  font-size: 0.9rem;
 }
-
-.form-link:hover {
-  color: white;
+a:hover {
+  color: #fff;
   text-decoration: underline;
 }

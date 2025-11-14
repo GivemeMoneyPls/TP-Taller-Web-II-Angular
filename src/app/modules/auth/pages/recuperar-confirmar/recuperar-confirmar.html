@@ -1,26 +1,31 @@
-<!-- src/app/modules/auth/pages/recuperar-confirmar/recuperar-confirmar.component.html -->
-<div class="recuperar-confirmar-container">
-  <div class="recuperar-confirmar-box">
-    <h2>Restablecer Contraseña</h2>
+<div class="recuperar-wrapper">
+  <div class="form-card">
+    <h2 class="form-title">Restablecer Contraseña</h2>
 
-    <!-- Input nueva contraseña -->
-    <input
-      type="password"
-      placeholder="Nueva contraseña"
-      [(ngModel)]="nuevaContrasena"
-    />
+    <form (ngSubmit)="confirmarNuevaContrasena()">
+      
+      <div class="mb-3">
+        <label class="form-label">Código de Recuperación</label>
+        <input type="text" class="form-control custom-input" 
+               [(ngModel)]="token" name="token" 
+               placeholder="Pega aquí el código del txt" required>
+      </div>
 
-    <!-- Input confirmar contraseña -->
-    <input
-      type="password"
-      placeholder="Confirmar contraseña"
-      [(ngModel)]="confirmarContrasena"
-    />
+      <div class="mb-3">
+        <label class="form-label">Nueva Contraseña</label>
+        <input type="password" class="form-control custom-input" 
+               [(ngModel)]="nuevaContrasena" name="newPass" 
+               placeholder="Mínimo 8 caracteres" required>
+      </div>
 
-    <!-- Botón para confirmar -->
-    <button (click)="confirmarContrasenaFunc()">Confirmar</button>
+      <div class="mb-3">
+        <label class="form-label">Confirmar Contraseña</label>
+        <input type="password" class="form-control custom-input" 
+               [(ngModel)]="confirmarContrasena" name="confirmPass" 
+               placeholder="Repite la contraseña" required>
+      </div>
 
-    <!-- Mensaje de error o éxito -->
-    <div class="mensaje" *ngIf="mensaje">{{ mensaje }}</div>
+      <button type="submit" class="btn btn-primary w-100 mt-3">Confirmar Cambio</button>
+    </form>
   </div>
 </div>

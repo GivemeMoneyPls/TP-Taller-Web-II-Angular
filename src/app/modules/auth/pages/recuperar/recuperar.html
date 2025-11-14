@@ -1,41 +1,29 @@
 <div class="recuperar-wrapper">
   <div class="form-card">
-
     <h2 class="form-title">Recuperar Contraseña</h2>
 
-    <!-- Mensaje de éxito -->
-    @if (mensajeExito) {
-      <div class="alert-success">{{ mensajeExito }}</div>
-    }
-
-    <!-- Mensaje de error -->
-    @if (mensajeError) {
-      <div class="alert-error">{{ mensajeError }}</div>
-    }
-
     <form (ngSubmit)="enviarCorreo()">
-
-      <div class="form-group">
-        <label for="correo">Correo electrónico</label>
-        <input
-          id="correo"
-          type="email"
-          class="form-input"
-          [(ngModel)]="correo"
-          name="correo"
-          placeholder="Tu correo"
+      <div class="mb-3">
+        <label class="form-label">Correo electrónico</label>
+        <input 
+          type="email" 
+          class="form-control custom-input" 
+          [(ngModel)]="correo" 
+          name="correo" 
+          placeholder="ejemplo@correo.com" 
           required
-        />
+          [disabled]="cargando">
       </div>
 
-      <button type="submit" class="submit-btn">Enviar correo</button>
+      <button type="submit" class="btn btn-primary w-100 mt-3" [disabled]="cargando">
+        {{ cargando ? 'Enviando...' : 'Enviar Correo' }}
+      </button>
 
       <div class="text-center mt-3">
-        <a routerLink="/signin" class="form-link">
+        <a routerLink="/signin" class="text-decoration-none text-white-50 small">
           Volver al inicio de sesión
         </a>
       </div>
-
     </form>
 
   </div>

@@ -100,4 +100,15 @@ export class AuthService {
     const user = this.getCurrentUser();
     return user ? (user.admin === true) : false;
   }
+
+  requestPasswordRecovery(email: string): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/recover`, { email });
+  }
+
+  confirmPasswordRecovery(token: string, nuevaContrasena: string): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/reset-password`, { 
+      token, 
+      nuevaContrasena 
+    });
+  }
 }

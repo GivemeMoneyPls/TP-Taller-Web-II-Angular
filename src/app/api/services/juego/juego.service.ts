@@ -34,4 +34,8 @@ export class JuegoService {
      return this.httpClient.post<Juego>(`${environment.API_URL_GAME}`, juego);
   }
 
+  deleteJuego(id:number): Observable<void> {
+    return this.httpClient.delete<void>(`${environment.API_URL_GAME}${id}`);
+  }
+
 }

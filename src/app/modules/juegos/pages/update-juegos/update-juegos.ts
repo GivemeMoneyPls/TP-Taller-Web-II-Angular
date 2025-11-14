@@ -56,7 +56,7 @@ export class UpdateJuegos {
         },
         complete: () => {
           this.router.navigate(['/gestionar-juegos'],
-        { queryParams: { mensajeExito: 'Juego actualizado correctamente' } });
+        { queryParams: { mensaje: 'Juego actualizado correctamente' } });
         }
       });
     }

@@ -1,0 +1,30 @@
+<div class="recuperar-wrapper">
+  <div class="form-card">
+    <h2 class="form-title">Recuperar Contraseña</h2>
+
+    <form (ngSubmit)="enviarCorreo()">
+      <div class="mb-3">
+        <label class="form-label">Correo electrónico</label>
+        <input 
+          type="email" 
+          class="form-control custom-input" 
+          [(ngModel)]="correo" 
+          name="correo" 
+          placeholder="ejemplo@correo.com" 
+          required
+          [disabled]="cargando">
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 mt-3" [disabled]="cargando">
+        {{ cargando ? 'Enviando...' : 'Enviar Correo' }}
+      </button>
+
+      <div class="text-center mt-3">
+        <a routerLink="/signin" class="text-decoration-none text-white-50 small">
+          Volver al inicio de sesión
+        </a>
+      </div>
+    </form>
+
+  </div>
+</div>

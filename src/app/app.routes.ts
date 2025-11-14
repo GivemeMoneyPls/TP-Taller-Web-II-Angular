@@ -13,6 +13,8 @@ import { authGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
 import { publicGuard } from './core/guards/public.guard';
 import { CreateJuego } from './modules/juegos/pages/create-juego/create-juego';
+import { RecuperarConfirmarComponent } from './modules/auth/pages/recuperar-confirmar/recuperar-confirmar.component';
+import { RecuperarComponent } from './modules/auth/pages/recuperar/recuperar.component';
 
 export const routes: Routes = [
 
@@ -75,6 +77,16 @@ export const routes: Routes = [
     component: Pago,
     canActivate: [authGuard]
   },
+{
+  path: 'recuperar',
+  component: RecuperarComponent
+},
+{
+  path: 'recuperar-confirmar',
+  component: RecuperarConfirmarComponent
+},
+
+
     {
       path: '**',
       redirectTo: ''
